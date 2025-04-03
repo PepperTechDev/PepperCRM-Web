@@ -2,6 +2,7 @@ import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "../features/auth/pages/Login";
 import PrivateRoute from "./PrivateRoute";
+import Sidebar from "../components/sidebar/pages/Sidebar";
 
 const protectedRoutes = [
   { path: "leads", element: <h1>Ruta protegida</h1> },
