@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { login } from "../services/authService";
 import logo from "../../../assets/images/PapperTech_logo_colored_text.png";
 import Input from "../../../components/forms/Input";
-import "../styles/Login.css";
+import "../styles/Login.modules.css";
 
 const Login = () => {
   const [email, setEmail] = useState("");

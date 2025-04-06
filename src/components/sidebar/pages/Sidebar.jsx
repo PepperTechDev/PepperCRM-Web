@@ -3,7 +3,7 @@ import { LuContactRound } from "react-icons/lu";
 import { useNavigate } from "react-router-dom";
 import { FaBoxArchive } from "react-icons/fa6";
 import { MdOutlineHandshake } from "react-icons/md";
-import "../styles/Sidebar.css"
+import "../styles/Sidebar.module.css"
 
 function SideBar() {
     const navigate = useNavigate();
