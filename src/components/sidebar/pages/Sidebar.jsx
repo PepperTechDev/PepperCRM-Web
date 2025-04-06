@@ -1,6 +1,6 @@
-import "../styles/sidebar.module.css";
-import logo from "../../../assets/images/PepperTech_logo_sin_fondo.png";
 import { UserSearch } from 'lucide-react';
+import logo from "../../../assets/images/PepperTech_logo_sin_fondo.png";
+import styles from "../styles/Sidebar.module.css";
 
 const Sidebar = () => {
   const menuItems = [
@@ -18,10 +18,10 @@ const Sidebar = () => {
   ];
 
   return (
-    <aside className="sidebar">
+    <aside className={styles.sidebar}>
       <div className="logo">
         <span className="logo-icon">
-          <img src={logo} alt="" />
+          <img src={logo} alt="PepperTech" />
         </span>
         <h1 className="logo-text">PepperTech</h1>
       </div>

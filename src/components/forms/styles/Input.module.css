@@ -1,11 +1,11 @@
-label {
+.inputGroup label {
     display: block;
     font-size: 12px;
     margin: 10px 0 5px;
     color: #000a16;
 }
 
-input {
+.inputGroup input {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
@@ -13,7 +13,7 @@ input {
     font-size: 16px;
 }
 
-input:focus {
+.inputGroup input:focus {
     border-color: #02735e;
     outline: none;
     box-shadow: 0px 0px 5px #02735e;

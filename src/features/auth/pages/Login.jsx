@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "../services/authService";
 import logo from "../../../assets/images/PapperTech_logo_colored_text.png";
-import Input from "../../../components/forms/Input";
-import "../styles/Login.modules.css";
+import Input from "../../../components/forms/pages/Input";
+import style from "../styles/Login.module.css";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -25,19 +25,19 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container">
+    <div className={style.loginContainer}>
       {/* Sección de la imagen */}
-      <div className="image-section">
-        <div className="image-placeholder">
+      <div className={style.imageSection}>
+        <div className={style.imagePlaceholder}>
           <img src={logo} alt="Logo" />
         </div>
       </div>
 
       {/* Sección del formulario */}
-      <div className="form-section">
+      <div className={style.formSection}>
         <h2>Log In</h2>
         {error && (
-          <p className="error" style={{ color: "red" }}>
+          <p className={style.error} style={{ color: "red" }}>
             {error}
           </p>
         )}
@@ -58,14 +58,14 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />    
-          <p className="info-text">
+          <p className={style.infoText}>
             It must be a combination of at least 8 letters, numbers, and
             symbols.
           </p>
-          <div className="links">
+          <div className={style.links}>
             <a href="#">Forgot Password?</a>
           </div>
-          <button className="submit" type="submit">Log In</button>
+          <button className={style.submit} type="submit">Log In</button>
         </form>
       </div>
     </div>

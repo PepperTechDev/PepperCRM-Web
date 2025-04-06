@@ -1,5 +1,4 @@
-import React from "react";
-import "./Input.module.css"; 
+import style from"../styles/Input.module.css"; 
 
 const Input = ({
   label,
@@ -11,7 +10,7 @@ const Input = ({
   required = false,
 }) => {
   return (
-    <div className="input-group">
+    <div className={style.inputGroup}>
       {label && <label htmlFor={name}>{label}</label>}
       <input
         id={name}
