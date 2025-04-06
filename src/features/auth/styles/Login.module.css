@@ -1,18 +1,5 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-}
-
-body {
-    display: flex;
-    justify-content: center;
-    height: 100vh;
-}
-
 /* Contenedor principal */
-.login-container {
+.loginContainer {
     display: flex;
     width: 100%;
     max-width: 1200px;
@@ -21,27 +8,27 @@ body {
 }
 
 /* Sección de imagen */
-.image-section {
+.imageSection {
     width: 50%;
     display: flex;
     justify-content: center;
 }
 
-.image-placeholder {
+.imagePlaceholder {
     max-width: 100%;
     height: 90vh;
-    background: #000a16;
+    background: var(--background-color-dark);
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 0px 0px 15px 15px;
 }
 
-.image-placeholder img {
+.imagePlaceholder img {
     width: 100%;
 }
 
-.form-section {
+.formSection {
     width: 50%;
     padding: 80px;
     display: flex;
@@ -49,37 +36,17 @@ body {
     justify-content: center;
 }
 
-h2 {
+.formSection h2 {
     margin-bottom: 20px;
-    color: #000a16;
+    color: var(--background-color-dark);
 }
 
-/* Estilos de los inputs */
-label {
-    display: block;
-    font-size: 12px;
-    margin: 10px 0 5px;
-    color: #000a16;
-}
 
-input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-}
-
-input:focus {
-    border-color: #02735e;
-    outline: none;
-    box-shadow: 0px 0px 5px #02735e;
-}
 
 /* Mensaje informativo */
-.info-text {
+.infoText {
     font-size: 12px;
-    color: #b6b5b5;
+    color: var(--info-text-color);
     margin-top: 5px;
 }
 
@@ -91,7 +58,7 @@ input:focus {
 
 .links a {
     text-decoration: none;
-    color: #36bfb1;
+    color: var(--accent-color);
     font-size: 14px;
 }
 
@@ -100,9 +67,9 @@ input:focus {
 }
 
 /* Botón */
-button {
+.submit {
     width: 100%;
-    background: #36bfb1;
+    background: var(--accent-color);
     color: white;
     border: none;
     padding: 10px;
@@ -112,62 +79,62 @@ button {
     margin-top: 20px;
 }
 
-button:hover {
-    background: #02735e;
+.submit:hover {
+    background: var(--secondary-color);
 }
 
 /* 🌐 Diseño responsive */
 @media (max-width: 768px) {
-    .login-container {
+    .loginContainer {
         flex-direction: column;
         width: 90%;
         margin: auto;
-        background: #000a16;
+        background: var(--background-color-dark);
     }
 
-    .image-section {
+    .imageSection {
         width: 100%;
     }
 
-    .image-placeholder {
+    .imagePlaceholder {
         width: 30%;
         height: 100%;
     }
-    h2 {
+    .formSection h2 {
         margin-bottom: 20px;
-        color: #F8FDFF ;
+        color: var(--background-color) ;
     }   
     
-    label {
+    .formSection label {
         display: block;
         font-size: 12px;
         margin: 10px 0 5px;
-        color: #F8FDFF ;
+        color: var(--background-color) ;
     }
 
-    .form-section {
+    .formSection {
         width: 100%;
         height: 50vh;
         padding: 2rem;
     }
 
-    h2 {
+    .formSection h2 {
         font-size: 24px;
     }
 }
 
 @media (max-width: 480px) {
-    .form-section {
+    .formSection {
         padding: 1.5rem;
     }
 
-    input,
+    .formSection input,
     button {
         font-size: 14px;
         padding: 8px;
     }
 
-    h2 {
+    .formSection h2 {
         font-size: 20px;
     }
 }
