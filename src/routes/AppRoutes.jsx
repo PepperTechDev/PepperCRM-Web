@@ -21,6 +21,7 @@ const AppRoutes = () => {
     <Routes>
       {/* Ruta pública */}
       <Route path="login" element={<Login />} />
+      <Route path="sidebar" element={<Sidebar />} />
 
       {/* Rutas protegidas no anidadas*/}
       {protectedRoutes.map(({ path, element }) => (

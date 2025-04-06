@@ -1,72 +1,43 @@
-import { CiCalendar } from "react-icons/ci";
-import { LuContactRound } from "react-icons/lu";
-import { useNavigate } from "react-router-dom";
-import { FaBoxArchive } from "react-icons/fa6";
-import { MdOutlineHandshake } from "react-icons/md";
-import "../styles/Sidebar.module.css"
+import "../styles/sidebar.module.css";
+import logo from "../../../assets/images/PepperTech_logo_sin_fondo.png";
+import { UserSearch } from 'lucide-react';
 
-function SideBar() {
-    const navigate = useNavigate();
+const Sidebar = () => {
+  const menuItems = [
+    { name: "Leads" },
+    { name: "Contacts" },
+    { name: "Deals" },
+    { name: "Products" },
+    { name: "Vendors" },
+    { name: "Quotes" },
+    { name: "Task" },
+    { name: "Calls" },
+    { name: "Meets" },
+    { name: "Forms" },
+    { name: "Calendar" },
+  ];
 
-    return (
-        <section className="sidebar">
-            <h1 className="sidebartitle">Jorge</h1>
-            <p className="sidebarsubtitle">Subitulo</p>
-            <ul>
-            
-                <li
-                    className="sidebarli"
-                    onClick={() => {
-                        navigate("");
-                    }}
-                >
-                <CiCalendar  className="sidebar__icon"/>Home
-                </li>
-                <li
-                    className="sidebarli"
-                    onClick={() => {
-                        navigate("/appointments");
-                    }}
-                >
-                    <LuContactRound className="sidebar__icon"/>Appointments
-                </li>
-                <li
-                    className="sidebarli"
-                    onClick={() => {
-                        navigate("/appointments");
-                    }}
-                >
-                    <MdOutlineHandshake className="sidebar__icon"/>Deals 
-                </li>
-                <li
-                    className="sidebarli"
-                    onClick={() => {
-                        
-                    }}
-                >
-                    <FaBoxArchive className="sidebar__icon"/>Products
-                </li>
-                <li
-                    className="sidebarli"
-                    onClick={() => {
-                        navigate("/groups");
-                    }}
-                >
-                    Groups
-                </li>
-                <li
-                    className="sidebarli"
-                    onClick={() => {
-                        navigate("/profile");
-                    }}
-                >
-                    Profile
-                </li>
-            </ul>
-            <h1 className="sidebar__bottom">
-                Sign Out
-            </h1>
-        </section>
-    )
-}
-export default SideBar
+  return (
+    <aside className="sidebar">
+      <div className="logo">
+        <span className="logo-icon">
+          <img src={logo} alt="" />
+        </span>
+        <h1 className="logo-text">PepperTech</h1>
+      </div>
+      <nav className="menu">
+        <p className="section-title">Main</p>
+        <ul>
+          {menuItems.map((item) => (
+            <li key={item.name}>
+              <UserSearch size={24} strokeWidth={1} />
+              <span>{item.name}</span>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </aside>
+  );
+};
+
+export default Sidebar;
