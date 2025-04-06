@@ -1,33 +1,32 @@
-/* Reset básico */
-*{
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  }
-  
-  html {
-    font-size: 62.5%;
-  }
-  
-  main {
-    display: flex;
-    flex-direction: column;
-    font-family: "Inter", sans-serif;
-    font-size: 1.6rem;
-    min-height: 100vh;
-  }
-  
-  .content{
-    display: flex;
-  }
-
-  .each_page {
-  background-color: var(--background-color);
 }
+
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  line-height: 1.5;  
+  color: #333;
+  background-color: #F8FDFF;
+}
+
 :root {
-  --primary-color: #67f494;
-  --secondary-color: #5cc59e;
-  --third-color: #4c5267;
-  --background-color: #363a51;
-  --background-color-dark: #1a2b42;
+  --primary-color: #00ffe5 ;
+  --secondary-color: #038C73 ;
+  --third-color: #02735E ;
+  --Four-color: #014034  ;
+  --background-color: #F8FDFF ;
+  --background-color-dark: #000a16;
+
+  --text-color: #000a16;
+  --info-text-color: #b6b5b5;
+  --accent-color: #36BFB1;
+  --muted-color: #ccc;
 }
