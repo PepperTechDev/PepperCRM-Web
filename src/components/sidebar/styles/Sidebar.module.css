@@ -1,5 +1,5 @@
 .sidebar {
-  width: 220px;
+  width: 240px;
   height: 100vh;
   box-sizing: border-box;
   border-right: 1px solid #ddd;
@@ -7,58 +7,62 @@
   box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
 }
 
-
 .logo {
   display: flex;
-  flex-direction: row;
   align-items: center;
-  font-weight: bold;
+  flex-direction: row;
   font-size: .9em;
-  gap: 8px;
-  color: #038C73;
-  padding: 0 20px;
+  font-weight: bold;
+  padding: 20px 20px;
   border-bottom: 1px solid #ddd;
   border-radius: 0px 15px 15px 0px;
+  gap: 10px;  
 }
 
-.logo-icon {
+.logoIcon {
   width: 40px;
   height: 40px;
   gap: 10px;
+  filter: drop-shadow(0 0 12px var(--background-color-dark));  
 }
 
-.logo-icon img {
+.logoIcon img {
   width: 100%;
+   
 }
 
-.logo-text {
+.logoText {
   background: linear-gradient(to bottom, #36BFB1, #02735E);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   color: transparent;
+
 }
 
-.section-title {
+.menu {
+  padding: 0px 35px;
+  margin-top: 30px;
+}
+
+.sectionTitle {
   color: #999;
-  font-size: 0.75rem;
+  font-size: 0.70rem;
   margin: 20px 0 10px;
   text-transform: uppercase;
 }
 
-.menu {
-  padding: 0px 20px;
-}
-
-
 .menu ul {
   list-style: none;
-  padding: 0;
-  margin: 0;
 }
 
 .menu li {
-  margin: 8px 0;
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  transition: background 0.2s;
+  padding: 8px 12px;
+  gap: 8px;
 }
 
 .menu a {
@@ -67,10 +71,9 @@
   padding: 8px 12px;
   display: flex;
   align-items: center;
-  border-radius: 8px;
-  transition: background 0.2s;
+
 }
 
-.menu a:hover {
+.menu li:hover {
   background-color: #f0f0f0;
 }
