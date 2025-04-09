@@ -1,4 +1,4 @@
-import { leads } from "../../assets/Leads";
+import { leads } from "./LeadsDataExample";
 import {
   getLeads,
   createLead,
