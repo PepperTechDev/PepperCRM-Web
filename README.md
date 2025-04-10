@@ -16,9 +16,8 @@ Antes de comenzar, asegúrate de tener instalado lo siguiente en tu sistema:
   npm install -g pnpm
   ```
 
-### **Para instalación con Docker**
-- **Docker**: [Descargar Docker](https://www.docker.com/)
-- **Docker Compose** (opcional, si no está incluido con Docker): [Descargar Docker Compose](https://docs.docker.com/compose/install/)
+### **Para ejecuccion en entorno local**
+- **Entorno local**: [Configuracion Entorno local](https://github.com/PepperTechDev/.github)
 
 ---
 
