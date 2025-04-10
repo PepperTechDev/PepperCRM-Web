@@ -13,7 +13,6 @@ function GrouptTable() {
               <th>Email</th>
               <th>Phone</th>
               <th>Service</th>
-              <th>Add</th>
               <th>Delete</th>
               <th>Edit</th>
             </tr>
