@@ -10,27 +10,15 @@ export const login = async (credentials) => {
     }
 };
 
-// Permite registrar un nuevo usuario
-export const register = async (userData) => {
+export const verifyToken = async (token) => {
     try {
-        const response = await api.post('/auth/register', userData);
-        return response.data;
-    } catch (error) {
-        throw error.response.data;
-    }
-};
-
-// Permite recuperar el usuario actual
-// Este método se utiliza para obtener los datos del usuario autenticado
-export const getCurrentUser = async (token) => {
-    try {
-        const response = await api.get('/auth/me', {
+        const response = await api.get('/auth/verify', {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
         });
         return response.data;
     } catch (error) {
-        throw error.response.data;
+        throw error.response?.data || { error: "Error al verificar el token" };
     }
 };
