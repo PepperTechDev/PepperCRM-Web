@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "../features/auth/pages/Login";
 import PrivateRoute from "./PrivateRoute";
 import Sidebar from "../components/sidebar/pages/Sidebar";
+import Leads from "../features/leads/pages/leads"
 
 const protectedRoutes = [
   { path: "leads", element: <h1>Ruta protegida</h1> },
@@ -21,7 +22,7 @@ const AppRoutes = () => {
     <Routes>
       {/* Ruta pública */}
       <Route path="login" element={<Login />} />
-      <Route path="sidebar" element={<Sidebar />} />
+      <Route path="leads" element={<Leads />} />
 
       {/* Rutas protegidas no anidadas*/}
       {protectedRoutes.map(({ path, element }) => (
