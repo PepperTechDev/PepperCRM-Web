@@ -5,6 +5,7 @@
     max-width: 1200px;
     overflow: hidden;
     height: 100vh;
+    margin: 0 auto;
 }
 
 /* Sección de imagen */
@@ -87,7 +88,7 @@
 @media (max-width: 768px) {
     .loginContainer {
         flex-direction: column;
-        width: 90%;
+        width: 100%;
         margin: auto;
         background: var(--background-color-dark);
     }
