@@ -1,29 +1,29 @@
 # Usar la imagen oficial de Node.js 20
 FROM node:20-alpine
 
-# Directorio de trabajo dentro del contenedor
+# Establecer el directorio de trabajo
 WORKDIR /app
 
-# Copiar los archivos de package.json y package-lock.json al contenedor
-COPY package.json package-lock.json ./
+# Copiar package.json y pnpm-lock.yaml
+COPY package.json pnpm-lock.yaml ./
 
-# Instalar la versión específica de npm (10.8.2)
-RUN npm install -g npm@10.8.2
+# Instalar pnpm (versión global)
+RUN corepack enable && corepack prepare pnpm@latest --activate
 
-# Instalar las dependencias del proyecto
-RUN npm install
+# Instalar dependencias con pnpm
+RUN pnpm install
 
-# Copiar el resto de los archivos al contenedor
-COPY . ./
+# Copiar el resto del código
+COPY . .
 
-# Compilar Javascript si es necesario
-RUN npm run build
+# Compilar el proyecto
+RUN pnpm run build
 
 # Instalar el paquete 'serve' para servir los archivos estáticos
-RUN npm install -g serve
+RUN pnpm add -g serve
 
-#  Exponer el puerto en el que se va a correr la aplicación (puerto por defecto 5173)
+# Exponer el puerto 5173 (por defecto para Vite o serve)
 EXPOSE 5173
 
-# Comando para arrancar el servidor estático de producción
+# Ejecutar la app en modo producción
 CMD ["serve", "-s", "dist", "-l", "5173"]
