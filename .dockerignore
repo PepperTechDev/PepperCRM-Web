@@ -1,0 +1,30 @@
+# Ignorar directorios y archivos innecesarios para la construcción de Docker
+
+# Node modules
+node_modules
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+pnpm-debug.log
+
+# Directorios de salida de la compilación
+dist
+dist-ssr
+
+# Archivos locales específicos de entorno
+*.local
+
+# Archivos y directorios de configuración de editores
+.vscode/
+.idea
+.DS_Store
+
+# Archivos de proyectos de Visual Studio
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Archivos temporales
+*.log
+*.swp
