@@ -19,6 +19,12 @@
   gap: 10px;  
 }
 
+.logoLink {
+  display: flex;
+  align-items: center;
+  text-decoration: none; /* Evita subrayados en el enlace */
+}
+
 .logoIcon {
   width: 40px;
   height: 40px;

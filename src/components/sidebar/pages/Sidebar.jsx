@@ -33,10 +33,12 @@ const Sidebar = () => {
   return (
     <aside className={styles.sidebar}>
       <div className={styles.logo}>
-        <span className={styles.logoIcon}>
-          <img src={logo} alt="PepperTech" />
-        </span>
-        <h1 className={styles.logoText}>PepperTech</h1>
+        <NavLink to="/leads" className={styles.logoLink}>
+          <span className={styles.logoIcon}>
+            <img src={logo} alt="PepperTech" />
+          </span>
+          <h1 className={styles.logoText}>PepperTech</h1>
+        </NavLink>
       </div>
       <nav className={styles.menu}>
         <p className={styles.sectionTitle}>Main</p>
