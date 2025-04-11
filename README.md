@@ -1,22 +1,22 @@
-# PepperCRM-Web: CRM desarrollado con React, Vite y JavaScript
+# PepperCRM-Web: CRM developed with React, Vite, and JavaScript
 
-PepperCRM-Web es una aplicación web diseñada para la gestión de relaciones con clientes (CRM). Este proyecto utiliza **React** como biblioteca principal para la interfaz de usuario, **Vite** como herramienta de construcción y desarrollo, y **JavaScript** como lenguaje principal. 
+PepperCRM-Web is a web application designed for customer relationship management (CRM). This project uses **React** as the main library for the user interface, **Vite** as the build and development tool, and **JavaScript** as the primary programming language.
 
-El objetivo de este proyecto es proporcionar una solución moderna, rápida y escalable para la gestión de leads, contactos, tareas y más.
+The goal of this project is to provide a modern, fast, and scalable solution for managing leads, contacts, tasks, and more.
 
 ---
 
-## **Requisitos previos**
-Antes de comenzar, asegúrate de tener instalado lo siguiente en tu sistema:
+## **Prerequisites**
+Before getting started, make sure you have the following installed on your system:
 
-### **Para instalación local**
-- **Node.js** (versión 18 o superior): [Descargar Node.js](https://nodejs.org/)
-- **pnpm** (gestor de paquetes): Puedes instalarlo ejecutando:
+### **For local installation**
+- **Node.js** (version 18 or higher): [Download Node.js](https://nodejs.org/)
+- **pnpm** (package manager): You can install it by running:
   ```bash
   npm install -g pnpm
   ```
 
-### **Para ejecuccion en entorno local**
+### **Local Installation**
 - **Entorno local**: [Configuracion Entorno local](https://github.com/PepperTechDev/.github)
 
 ---
@@ -26,38 +26,38 @@ Antes de comenzar, asegúrate de tener instalado lo siguiente en tu sistema:
 ### **1. Instalación local**
 Sigue estos pasos para configurar el proyecto en tu entorno local:
 
-1. **Clona el repositorio**:
+1. **Clone the repository**:
    ```bash
    git clone https://github.com/PepperTechDev/PepperCRM-Web.git
    ```
 
-2. **Accede al directorio del proyecto**:
+2. **Navigate to the project directory**:
    ```bash
    cd PepperCRM-Web
    ```
 
-3. **Instala las dependencias**:
+3. **Install dependencies**:
    ```bash
    pnpm install
    ```
 
-4. **Inicia el servidor de desarrollo**:
+4. **Start the development server**:
    ```bash
    pnpm dev
    ```
-   Esto abrirá la aplicación en tu navegador en la dirección [http://localhost:5173](http://localhost:5173).
+   This will open the application in your browser at [http://localhost:5173](http://localhost:5173).
 
 ---
 
-### **2. Instalación con Docker**
-Sigue estos pasos para ejecutar el proyecto utilizando Docker:
+### **2. Docker Installation**
+Follow these steps to run the project using Docker:
 
 
-## **Variables de entorno**
-El archivo `.env` se utiliza para configurar las variables de entorno necesarias para la aplicación. Asegúrate de crear un archivo `.env` en la raíz del proyecto con las siguientes variables:
+## **Environment Variables**
+The `.env` file let me know if you'd like help completing the section about Docker or the `.env` file configuration:
 
 ```env
 VITE_API_URL=https://api.tu-backend.com
 ```
 
-Reemplaza `https://api.tu-backend.com` con la URL de tu backend.
+Replace `https://api.tu-backend.com` with your backend URL.
