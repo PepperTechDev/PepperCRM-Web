@@ -18,7 +18,7 @@ function getAuthToken() {
 }
 
 // Interceptor de solicitud
-apiClient.interceptors.request.use(
+ApiClient.interceptors.request.use(
   (config) => {
     const token = getAuthToken();
     if (token) {
@@ -30,7 +30,7 @@ apiClient.interceptors.request.use(
 );
 
 // Interceptor de respuesta
-apiClient.interceptors.response.use(
+ApiClient.interceptors.response.use(
   (response) => response,
   (error) => {
     const status = error.response?.status;
