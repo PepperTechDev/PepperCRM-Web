@@ -1,6 +1,6 @@
 import DataListItem from "../../../components/dataListItem/pages/DataListItem";
 import { CircleX, Pen } from "lucide-react";
-import { getLeads, createLead, updateLead, deleteLead } from "../services/contactService";
+import { getLeads, createLead, updateLead, deleteLead } from "../services/LeadService";
 
 
 const userData = [
