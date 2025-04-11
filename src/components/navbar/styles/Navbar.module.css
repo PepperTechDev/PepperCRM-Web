@@ -19,15 +19,19 @@
 
 .breadcrumb .section {
   font-weight: 600;
-  color: var(--third-color);
+  color: var(--secondary-color);
 }
-
 .breadcrumb .separator {
   margin: 0 0.8rem;
 }
 
-.breadcrumb .current {
-  color: var(--info-text-color);
+.link {
+  text-decoration: none;
+  color: var(--Four-color);
+}
+
+.link:hover {
+  text-decoration: underline;
 }
 
 .searchWrapper {
@@ -59,3 +63,4 @@
   color: var(--Four-color); /* azul al pasar el mouse */
   transform: scale(1.1); /* efecto de zoom opcional */
 }
+
