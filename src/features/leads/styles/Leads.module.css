@@ -1,0 +1,11 @@
+.containerLeads {
+  display: flex;
+  gap: 12px;
+}
+
+.flexLeads {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
