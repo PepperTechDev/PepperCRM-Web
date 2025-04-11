@@ -7,6 +7,7 @@ import Contacts from "../features/contacts/pages/Contacts";
 import Products from "../features/products/pages/Products";
 import Quotes from "../features/quotes/pages/Quotes";
 import Vendors from "../features/vendors/pages/Vendors";
+import NotFound from "../pages/notFound/pages/NotFound";
 
 
 
@@ -29,6 +30,8 @@ const AppRoutes = () => {
       <Route path="/" element={<Login />} />
       <Route path="login" element={<Login />} />
       <Route path="leads/all" element={<Leads />} />
+      <Route path="notFound" element={<NotFound />} />
+
 
 
 
@@ -48,7 +51,7 @@ const AppRoutes = () => {
       </Route>
 
       {/* Redirección para rutas no encontradas */}
-      <Route path="*" element={<Navigate to="/login" replace />} />
+      <Route path="*" element={<Navigate to="/notFound" replace />} />
     </Routes>
   );
 };
