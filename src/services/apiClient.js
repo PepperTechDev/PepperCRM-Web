@@ -1,38 +1,53 @@
 import axios from 'axios';
 
 const apiClient = axios.create({
-  baseURL: import.meta.env.VITE_API_URL, 
+  baseURL: import.meta.env.VITE_API_URL,
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
-// Interceptores para manejar solicitudes y respuestas
-// Se utiliza para agregar el token de autorización a las solicitudes
+// Función para obtener el token
+function getAuthToken() {
+  try {
+    return localStorage.getItem('token');
+  } catch (error) {
+    console.error('No fue posible optener el token:', error);
+    return null;
+  }
+}
+
+// Interceptor de solicitud
 apiClient.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('token'); // Recupera el token del almacenamiento local
+    const token = getAuthToken();
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
   },
-  (error) => {
-    return Promise.reject(error);
-  }
+  (error) => Promise.reject(error)
 );
 
+// Interceptor de respuesta
 apiClient.interceptors.response.use(
-  (response) => {
-    return response;
-  },
+  (response) => response,
   (error) => {
-    if (error.response && error.response.status === 401) {
-      // Manejo de error 401 (no autorizado)
-      // Aquí puedes manejar el cierre de sesión del usuario
-      localStorage.removeItem('token');
-      window.location.href = '/login'; // Redirect to login page
+    const status = error.response?.status;
+
+    if (status === 401) {
+      try {
+        localStorage.removeItem('token');
+      } catch (e) {
+        console.warn('No se pudo eliminar el token:', e);
+      }
+
+      // Retardo opcional para permitir el render de mensajes o loaders
+      setTimeout(() => {
+        window.location.href = '/login';
+      }, 100);
     }
+
     return Promise.reject(error);
   }
 );

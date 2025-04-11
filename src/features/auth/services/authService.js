@@ -1,4 +1,4 @@
-import api from '../../../services/apiClient';
+import api from '../../../services/ApiClient';
 
 // Permite recuperar el token de la API
 export const login = async (credentials) => {

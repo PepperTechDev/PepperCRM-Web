@@ -1,10 +1,11 @@
 import React from "react";
 import "../styles/leads.modules.css";
-import GroupTable from "../../../components/leads/GroupTable";
+import LeadsTable from "../../../components/leads/LeadsTable";
 function Leads() {
   return (
     <section>
-      <GroupTable />
+      <LeadsTable />
+     
     </section>
   );
 }
