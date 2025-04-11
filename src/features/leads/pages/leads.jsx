@@ -1,11 +1,11 @@
 import React from "react";
-import "../styles/leads.modules.css";
+import styles from"../styles/Leads.modules.css";
 import LeadsTable from "../../../components/leads/LeadsTable";
 function Leads() {
   return (
-    <section>
+    <section className={styles.containerLeads}>
       <LeadsTable />
-     
+
     </section>
   );
 }
