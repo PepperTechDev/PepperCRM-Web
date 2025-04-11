@@ -5,17 +5,17 @@ export const getContacts = async () => {
   return response.data;
 };
 
-export const createContact = async (contact) => {
+export const createContacts = async (contact) => {
   const response = await api.post("/contacts", contact);
   return response.data;
 };
 
-export const updateContact = async (id, contact) => {
+export const updateContacts = async (id, contact) => {
   const response = await api.put(`/contacts/${id}`, contact);
   return response.data;
 };
 
-export const deleteContact = async (id) => {
+export const deleteContacts = async (id) => {
   const response = await api.delete(`/contacts/${id}`);
   return response.data;
 };
