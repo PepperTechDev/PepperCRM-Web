@@ -16,7 +16,9 @@
     "pnpm": "^10.7.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-router-dom": "^7.4.1"
+    "react-hook-form": "^7.46.1",
+    "react-router-dom": "^7.4.1",
+    "multiselect-react-dropdown": "^2.0.25"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
