@@ -37,4 +37,4 @@ DataListItem.propTypes = {
   emptyMessage: PropTypes.string, // Mensaje para cuando no hay datos
 };
 
-export default DataListItem;
+export default DataListItem;
