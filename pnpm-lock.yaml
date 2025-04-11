@@ -21,8 +21,8 @@ importers:
         specifier: 'file:'
         version: 'file:'
       pnpm:
-        specifier: ^10.7.0
-        version: 10.7.1
+        specifier: ^10.8.0
+        version: 10.8.0
       react:
         specifier: ^19.0.0
         version: 19.1.0
@@ -843,8 +843,8 @@ packages:
   picocolors@1.1.1:
     resolution: {integrity: sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA==}
 
-  pnpm@10.7.1:
-    resolution: {integrity: sha512-LZLIa3ko3IKE9TSU+0IB+YPaZfD7Tw1Auq+lz2KPox2uPllo8SRm8X336XMQ4w80OmSLrqG5s1BoXa+v/99YCA==}
+  pnpm@10.8.0:
+    resolution: {integrity: sha512-DoJxTRtbQ8dGEBk8sgc0iXwdAN6J0OGEIK68WXf6E9eAqcsFc0Yk6B69gcyHbNRkeUhQZBxIuVRDJrViLKKZcQ==}
     engines: {node: '>=18.12'}
     hasBin: true
 
@@ -1642,7 +1642,7 @@ snapshots:
       axios: 1.8.4
       lucide-react: 0.487.0(react@19.1.0)
       multiselect-react-dropdown: 2.0.25(react@19.1.0)
-      pnpm: 10.7.1
+      pnpm: 10.8.0
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
       react-hook-form: 7.55.0(react@19.1.0)
@@ -1652,7 +1652,7 @@ snapshots:
 
   picocolors@1.1.1: {}
 
-  pnpm@10.7.1: {}
+  pnpm@10.8.0: {}
 
   postcss@8.5.3:
     dependencies:
