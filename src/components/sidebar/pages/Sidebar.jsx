@@ -1,4 +1,3 @@
-import { UserSearch } from "lucide-react";
 import logo from "../../../assets/images/PepperTech_logo_sin_fondo.png";
 import styles from "../styles/Sidebar.module.css";
 import { UserPlus, Users, Handshake, Package, Building2, FileText, CheckSquare, Phone, Video, File, Calendar } from "lucide-react";
