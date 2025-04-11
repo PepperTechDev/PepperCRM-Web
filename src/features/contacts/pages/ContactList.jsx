@@ -1,6 +1,6 @@
 import DataListItem from "../../../components/dataListItem/pages/DataListItem";
 import { CircleX, Pen } from "lucide-react";
-import { getContacts, createContact, updateContact, deleteContact } from "../services/contactService";
+import { getContacts, createContacts, updateContacts, deleteContacts } from "../services/contactService";
 
 const ContactList = () => {
   
@@ -22,8 +22,8 @@ const userData = [];
       <td>{item.email}</td>
       <td>{item.phone}</td>
       <td>
-        <CircleX onClick={() => deleteContact(item.id)} />
-        <Pen onClick={() => updateContact(item.id, item)} />
+        <CircleX onClick={() => updateContacts(item.id)} />
+        <Pen onClick={() => deleteContacts(item.id, item)} />
       </td>
     </>
   );
