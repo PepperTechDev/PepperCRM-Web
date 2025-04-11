@@ -1655,6 +1655,7 @@ snapshots:
       lucide-react: 0.487.0(react@19.0.0)
       multiselect-react-dropdown: 2.0.25(react@19.0.0)
       pnpm: 10.8.0
+      prop-types: 15.8.1
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
       react-hook-form: 7.55.0(react@19.0.0)
