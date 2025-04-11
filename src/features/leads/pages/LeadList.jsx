@@ -1,4 +1,4 @@
-import DataListItem from "../dataListItem/pages/DataListItem";
+import DataListItem from "../../../components/dataListItem/pages/DataListItem";
 
 const userData = [
   { id: 1, name: "Jhoan Esteban Londoño Escobar", email: "devlondono@gmail.com" },
