@@ -33,7 +33,7 @@ const userData = [];
       data={userData}
       renderHeaders={renderHeaders}
       renderRow={renderRow}
-      emptyMessage="No contacts available"
+      emptyMessage="No calls available"
     />
   );
 };
