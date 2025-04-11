@@ -60,7 +60,7 @@ const UserList = () => {
       data={userData}
       renderHeaders={renderHeaders}
       renderRow={renderRow}
-      emptyMessage="No users available"
+      emptyMessage="No leads available"
     />
   );
 };
