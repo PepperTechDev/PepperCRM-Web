@@ -1,6 +1,19 @@
+import { NavLink } from "react-router-dom";
 import logo from "../../../assets/images/PepperTech_logo_sin_fondo.png";
 import styles from "../styles/Sidebar.module.css";
-import { UserPlus, Users, Handshake, Package, Building2, FileText, CheckSquare, Phone, Video, File, Calendar } from "lucide-react";
+import {
+  UserPlus,
+  Users,
+  Handshake,
+  Package,
+  Building2,
+  FileText,
+  CheckSquare,
+  Phone,
+  Video,
+  File,
+  Calendar,
+} from "lucide-react";
 
 const Sidebar = () => {
   const menuItems = [
@@ -30,8 +43,15 @@ const Sidebar = () => {
         <ul>
           {menuItems.map((item) => (
             <li key={item.name}>
-              <span>{item.icon}</span>
-              <a href={item.name}>{item.name}</a>
+              <NavLink
+                to={`/${item.name.toLowerCase()}`}
+                className={({ isActive }) =>
+                  isActive ? `${styles.active} ${styles.link}` : styles.link
+                }
+              >
+                <span>{item.icon}</span>
+                {item.name}
+              </NavLink>
             </li>
           ))}
         </ul>
