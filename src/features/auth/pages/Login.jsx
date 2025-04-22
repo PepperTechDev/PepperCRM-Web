@@ -17,8 +17,9 @@ const Login = () => {
 
     try {
       const data = await login({ email, password });
-      localStorage.setItem("token", data.token); // Guarda token
-      navigate("/leads"); // Redirige al módulo principal
+      if (data.token) {
+        navigate("/leads"); // Redirige al módulo principal
+      }
     } catch (err) {
       setError("Credenciales inválidas: " + err.message);
     }
