@@ -4,7 +4,7 @@ import { verifyToken } from '../features/auth/services/authService';
 
 
 const isAuthenticated = async () => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("authToken");
   if (!token) return false;
 
     try {
