@@ -1,3 +1,4 @@
+import { logout } from "../../../features/auth/services/authService";
 import { useLocation, Link } from "react-router-dom";
 import styles from "../styles/Navbar.module.css";
 import { Search, CircleHelp, CircleUser } from "lucide-react";
@@ -43,7 +44,7 @@ const Navbar = () => {
       </div>
       <div className={styles.icons}>
         <CircleHelp className={styles.iconButton} size={24} strokeWidth={1.5} />
-        <CircleUser className={styles.iconButton} size={24} strokeWidth={1.5} />
+        <CircleUser className={styles.iconButton} size={24} strokeWidth={1.5} onClick={logout} />      
       </div>
     </nav>
   );
