@@ -10,7 +10,7 @@ export const login = createAsyncThunk('auth/login', async (data) => {
 const authSlice = createSlice({
   name: 'auth',
   initialState: {
-    token: localStorage.getItem('token') || null,
+    token: localStorage.getItem('authToken') || null,
     user: null,
   },
   reducers: {
