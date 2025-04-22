@@ -1,6 +1,6 @@
 import DataListItem from "../../../components/dataListItem/pages/DataListItem";
 import { CircleX, Pen } from "lucide-react";
-import { getContacts, createContacts, updateContacts, deleteContacts } from "../services/contactService";
+import { getContacts, createContacts, updateContacts, deleteContacts } from "../services/ContactService";
 
 const ContactList = () => {
   
