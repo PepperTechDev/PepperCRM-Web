@@ -10,7 +10,7 @@ const ApiClient = axios.create({
 // Función para obtener el token
 function getAuthToken() {
   try {
-    return localStorage.getItem('token');
+    return localStorage.getItem('authToken');
   } catch (error) {
     console.error('No fue posible optener el token:', error);
     return null;
@@ -37,7 +37,7 @@ ApiClient.interceptors.response.use(
 
     if (status === 401) {
       try {
-        localStorage.removeItem('token');
+        localStorage.removeItem('authToken');
       } catch (e) {
         console.warn('No se pudo eliminar el token:', e);
       }
