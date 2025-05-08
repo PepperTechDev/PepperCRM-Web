@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { getToken, removeToken} from "../features/auth/services/authService";
+
 
 const ApiClient = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
@@ -10,7 +12,7 @@ const ApiClient = axios.create({
 // Función para obtener el token
 function getAuthToken() {
   try {
-    return localStorage.getItem('authToken');
+    return getToken();
   } catch (error) {
     console.error('No fue posible optener el token:', error);
     return null;
@@ -37,7 +39,7 @@ ApiClient.interceptors.response.use(
 
     if (status === 401) {
       try {
-        localStorage.removeItem('authToken');
+        removeToken();
       } catch (e) {
         console.warn('No se pudo eliminar el token:', e);
       }
