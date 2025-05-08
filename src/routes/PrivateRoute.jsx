@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import { verifyToken } from '../features/auth/services/authService';
+import { getToken} from "../features/auth/services/authService";
+
 
 
 const isAuthenticated = async () => {
-  const token = localStorage.getItem("authToken");
+  const token = getToken();
   if (!token) return false;
 
     try {
