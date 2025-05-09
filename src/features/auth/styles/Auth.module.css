@@ -90,6 +90,13 @@
     background: var(--secondary-color);
 }
 
+.registerLink {
+    text-decoration: none;
+    color: var(--accent-color);
+    font-size: 14px;
+}
+
+
 /* 🌐 Diseño responsive */
 @media (max-width: 768px) {
     .authContainer {
@@ -107,16 +114,17 @@
         width: 30%;
         height: 100%;
     }
+
     .formSection h2 {
         margin-bottom: 20px;
-        color: var(--background-color) ;
-    }   
-    
+        color: var(--background-color);
+    }
+
     .formSection label {
         display: block;
         font-size: 12px;
         margin: 10px 0 5px;
-        color: var(--background-color) ;
+        color: var(--background-color);
     }
 
     .formSection {
