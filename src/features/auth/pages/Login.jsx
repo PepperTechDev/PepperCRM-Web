@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { login } from "../services/authService";
 import logo from "../../../assets/images/PapperTech_logo_colored_text.png";
 import Input from "../../../components/forms/pages/Input";
-import styles from "../styles/Login.module.css";
+import styles from "../styles/Auth.module.css";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -26,7 +26,7 @@ const Login = () => {
   };
 
   return (
-    <div className={styles.loginContainer}>
+    <div className={styles.authContainer}>
       {/* Sección de la imagen */}
       <div className={styles.imageSection}>
         <div className={styles.imagePlaceholder}>
