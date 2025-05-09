@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom"; // Importa Link para la navegación
 import { login } from "../services/authService";
 import logo from "../../../assets/images/PapperTech_logo_colored_text.png";
 import Input from "../../../components/forms/pages/Input";
@@ -51,14 +51,14 @@ const Login = () => {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-           <Input
+          <Input
             label="Password"
             name="password"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-          />    
+          />
           <p className={styles.infoText}>
             It must be a combination of at least 8 letters, numbers, and
             symbols.
@@ -66,8 +66,11 @@ const Login = () => {
           <div className={styles.links}>
             <a href="#">Forgot Password?</a>
           </div>
-          <button className={styles.submit} type="submit">Log In</button>
+          <button className={styles.submit} type="submit">
+            Log In
+          </button>
         </form>
+        <p className={styles.infoText}>Don't have an account? <Link to="/register" className={styles.registerLink}>Register here</Link> </p>
       </div>
     </div>
   );
