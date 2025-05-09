@@ -1,4 +1,6 @@
 import api from "../../../services/ApiClient";
+import { getToken } from "../../../features/auth/services/authService";
+import ApiClient from "../../../services/ApiClient";
 let mockLeads = [
   {
     id: 1,
@@ -17,14 +19,24 @@ let mockLeads = [
     phone: "3235312623",
     service: "Service 1",
     State: true,
+  },{
+    id: 3,
+    name: "Sebas Andrés",
+    lastname: "Londoño Escobar",
+    email: "f@gmail.com",
+    phone: "324567890",
+    service: "Service 3",
+    State: true,
   },
 ];
 
 // Simula una llamada GET
-export const getLeads = () => {
+
+export const getLeads = async () => {
+  // Simulación de una llamada a la API
   return new Promise((resolve) => {
     setTimeout(() => {
-      resolve([...mockLeads]); // copia para no mutar original
+      resolve(mockLeads);
     }, 500);
   });
 };
@@ -41,5 +53,15 @@ export const deleteLead = (id) => {
         reject(new Error("Lead not found"));
       }
     }, 300);
+  });
+};
+
+export const updateLead = async (updatedUser) => {
+  // Simulación de actualización
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      console.log("Mock updated:", updatedUser);
+      resolve({ success: true, data: updatedUser });
+    }, 500);
   });
 };

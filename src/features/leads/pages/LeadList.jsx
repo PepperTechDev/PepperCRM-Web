@@ -1,6 +1,6 @@
 import DataListItem from "../../../components/dataListItem/pages/DataListItem";
 import { CircleX, Pen } from "lucide-react";
-import { deleteLead, getLeads} from "../services/LeadService";
+import { deleteLead, getLeads, updateLead} from "../services/LeadService";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
@@ -20,7 +20,7 @@ const UserList = () => {
       const data = await getLeads();
       setUsers(data);
     } catch (error) {
-      console.error("Error loading leads:", error);
+      alert("Failed to load users"+error);
     }
   };
   
@@ -63,6 +63,7 @@ const UserList = () => {
       <input id="swal-input-lastname" class="swal2-input" placeholder="Lastname" value="${user.lastname}">
       <input id="swal-input-email" class="swal2-input" placeholder="Email" value="${user.email}">
       <input id="swal-input-phone" class="swal2-input" placeholder="Phone" value="${user.phone}">
+      <input id="swal-input-phone" class="swal2-input" placeholder="Phone" value="${user.service}">
     `,
     focusConfirm: false,
     showCancelButton: true,
@@ -79,7 +80,7 @@ const UserList = () => {
 
   if (formValues) {
     try {
-      // await updateLead(formValues); // Si tuvieras el servicio
+      await updateLead(formValues); 
       setUsers((prev) =>
         prev.map((u) => (u.id === user.id ? formValues : u))
       );
@@ -116,7 +117,7 @@ const renderRow = (item) => (
       <CircleX onClick={() => handleDelete(item.id)}/>
     </td>
     <td>
-      <Pen onClick={() => handleEdit(item.id)}/>
+      <Pen onClick={() => handleEdit(item)}/>
     </td>
   </>
 );
