@@ -1,7 +1,9 @@
 import { removeToken } from "../../../features/auth/services/authService";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, Link, NavLink, useNavigate } from "react-router-dom";
 import styles from "../styles/Navbar.module.css";
-import { Search, CircleHelp, CircleUser } from "lucide-react";
+import { Search, CircleHelp } from "lucide-react";
+import { LogOut } from "lucide-react";
+
 
 const Navbar = () => {
   const location = useLocation();
@@ -10,6 +12,13 @@ const Navbar = () => {
   const pathSegments = location.pathname
     .split("/")
     .filter((segment) => segment);
+
+  // Le coloca la ruta al boton de ayuda
+  const navigate = useNavigate();
+  const handleHelpClick = () => {
+    navigate("/help");
+  };
+
   return (
     <nav className={styles.headerBar}>
       <div className={styles.breadcrumb}>
@@ -43,8 +52,8 @@ const Navbar = () => {
         />
       </div>
       <div className={styles.icons}>
-        <CircleHelp className={styles.iconButton} size={24} strokeWidth={1.5} />
-        <CircleUser className={styles.iconButton} size={24} strokeWidth={1.5} onClick={removeToken} />      
+        <CircleHelp className={styles.iconButton} size={24} strokeWidth={1.5} onClick={handleHelpClick}/>
+        <LogOut className={styles.iconButton} size={24} strokeWidth={1.5} onClick={removeToken} />      
       </div>
     </nav>
   );
