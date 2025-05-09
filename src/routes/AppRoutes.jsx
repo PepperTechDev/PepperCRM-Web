@@ -8,6 +8,8 @@ import Products from "../features/products/pages/Products";
 import Quotes from "../features/quotes/pages/Quotes";
 import Vendors from "../features/vendors/pages/Vendors";
 import NotFound from "../pages/notFound/pages/NotFound";
+import UserProfile from "../pages/userProfile/pages/UserProfile";
+
 
 
 
@@ -31,6 +33,8 @@ const AppRoutes = () => {
       <Route path="login" element={<Login />} />
       <Route path="leads/all" element={<Leads />} />
       <Route path="notFound" element={<NotFound />} />
+      <Route path="userProfile" element={<UserProfile />} />
+
 
 
 
