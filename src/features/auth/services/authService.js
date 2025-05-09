@@ -24,7 +24,6 @@ export const register = async (credentials) => {
   try {
     const response = await api.post("/auth/register", credentials);
     const data = response.data;
-
     return data;
   } catch (error) {
     throw error.response?.data || { error: "Error al registrarse" };
