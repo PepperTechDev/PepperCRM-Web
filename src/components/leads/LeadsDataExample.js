@@ -10,15 +10,6 @@ export const leads = [
     State: true,
   },
   {
-    Id: 2,
-    Name: "Ana",
-    Lastname: "Gómez",
-    Email: "ana@example.com",
-    Phone: "987654321",
-    Service: "Soporte",
-    State: true,
-  },
-  {
     Id: 3,
     Name: "Carlos",
     Lastname: "Rodríguez",

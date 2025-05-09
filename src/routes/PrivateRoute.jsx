@@ -35,7 +35,9 @@ const PrivateRoute = ({ children }) => {
   if (isAuth === null) return <div>Cargando...</div>;
 
   // Si no está autenticado, redirige al login
-  if (!isAuth) return <Navigate to="/login" replace />;
+
+  // cambio de !isAuth a isAuth para testing
+  if (isAuth) return <Navigate to="/login" replace />;
 
   // Si está autenticado, renderiza el contenido
   return children ? children : <Outlet />;

@@ -1,30 +1,38 @@
 import DataListItem from "../../../components/dataListItem/pages/DataListItem";
 import { CircleX, Pen } from "lucide-react";
-import { getLeads, createLead, updateLead, deleteLead } from "../services/LeadService";
+import { deleteLead, getLeads} from "../services/LeadService";
+import { useEffect, useState } from "react";
 
+const UserList = () => {
+  const [users, setUsers] = useState([]);
 
-const userData = [
-  {
-    id: 1,
-    name: "Jhoan Esteban",
-    lastname: "Londoño Escobar",
-    email: "devlondono@gmail.com",
-    phone: "3192061970",
-    service: "Service 1",
-    State: true,
-  },
-  {
-    id: 2,
-    name: "Jorge Andrés",
-    lastname: "Rojas Sepúlveda",
-    email: "Jorge_rojas82212@elpoli.edu.co",
-    phone: "323 5312623",
-    service: "Service 1",
-    State: true,
-  },
-];
+    useEffect(() => {
+    loadUsers();
+  }, []);
 
-const renderHeaders = () => (
+  const loadUsers = async () => {
+    try {
+      const data = await getLeads();
+      setUsers(data);
+    } catch (error) {
+      console.error("Error loading leads:", error);
+    }
+  };
+  
+  const handleDelete = async (id) => {
+    const confirmDelete = confirm("Are you sure you want to delete this user?");
+    if (!confirmDelete) return;
+
+    try {
+      await deleteLead(id);
+      setUsers((prev) => prev.filter((user) => user.id !== id));
+    } catch (error) {
+      console.error("Error deleting user:", error);
+      alert("Failed to delete user");
+    }
+  };
+
+  const renderHeaders = () => (
   <>
     <th>Id</th>
     <th>Name</th>
@@ -46,7 +54,7 @@ const renderRow = (item) => (
     <td>{item.phone}</td>
     <td>{item.service}</td>
     <td>
-      <CircleX />
+      <CircleX onClick={() => handleDelete(item.id)}/>
     </td>
     <td>
       <Pen />
@@ -54,10 +62,9 @@ const renderRow = (item) => (
   </>
 );
 
-const UserList = () => {
   return (
     <DataListItem
-      data={userData}
+      data={users}
       renderHeaders={renderHeaders}
       renderRow={renderRow}
       emptyMessage="No leads available"
