@@ -7,9 +7,11 @@ import styles from "../styles/Auth.module.css";
 
 const Register = () => {
   const [name, setName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [lastname, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [role, ] = useState("USER"); // Valor por defecto
+
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -19,9 +21,10 @@ const Register = () => {
     try {
       const data = await register({
         name,
-        lastName,
+        lastname,
         email,
         password,
+        role,
       });
       if (data.token) {
         navigate("/"); // Redirige al módulo principal
@@ -62,7 +65,7 @@ const Register = () => {
               label="last Name"
               name="lastName"
               type="text"
-              value={lastName}
+              value={lastname}
               onChange={(e) => setLastName(e.target.value)}
               required
             />
