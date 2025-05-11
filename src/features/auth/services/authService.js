@@ -19,6 +19,18 @@ export const login = async (credentials) => {
   }
 };
 
+
+export const register = async (credentials) => {
+  try {
+    const response = await api.post("/auth/register", credentials);
+    const data = response.data;
+    return data;
+  } catch (error) {
+    throw error.response?.data || { error: "Error al registrarse" };
+  }
+};
+
+
 // Verifica si el token es válido
 export const verifyToken = async () => {
   const token = getToken();
