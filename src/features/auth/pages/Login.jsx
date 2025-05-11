@@ -44,7 +44,7 @@ const Login = () => {
         )}
         <form onSubmit={handleSubmit}>
           <Input
-            label="Username"
+            label="Email"
             name="email"
             type="text"
             value={email}

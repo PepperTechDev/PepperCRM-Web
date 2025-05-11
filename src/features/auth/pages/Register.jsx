@@ -71,7 +71,7 @@ const Register = () => {
             />
           </div>
           <Input
-            label="Username"
+            label="Email"
             name="email"
             type="text"
             value={email}
