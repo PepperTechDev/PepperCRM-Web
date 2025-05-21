@@ -1,0 +1,15 @@
+.task {
+  background-color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  cursor: grab;
+  transition: background-color 0.2s ease;
+}
+
+.task:active {
+  cursor: grabbing;
+  background-color: #e2e6ea;
+}
