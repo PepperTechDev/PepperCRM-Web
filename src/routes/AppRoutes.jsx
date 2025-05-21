@@ -9,6 +9,7 @@ import Products from "../features/products/pages/Products";
 import Quotes from "../features/quotes/pages/Quotes";
 import Vendors from "../features/vendors/pages/Vendors";
 import NotFound from "../pages/notFound/pages/NotFound";
+import Kanban from "../components/kanban/pages/Kanban";
 
 const protectedRoutes = [
   { path: "leads", element: <Leads /> },
@@ -30,6 +31,7 @@ const AppRoutes = () => {
       <Route path="login" element={<Login />} />
       <Route path="register" element={<Register />} />
       <Route path="leads/all" element={<Leads />} />
+      <Route path="task" element={<Kanban />} />
       <Route path="notFound" element={<NotFound />} />
 
 

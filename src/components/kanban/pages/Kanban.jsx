@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react';
 import { DndContext } from '@dnd-kit/core';
 import Board from '../board/board';
 import { fetchKanbanData } from '../../../services/ApiKanban';
-
+import Navbar from '../../navbar/pages/Navbar';
+import Sidebar from '../../sidebar/pages/Sidebar';
+import styles from '../styles/Kanban.module.css';
 function Kanban() {
   const [columns, setColumns] = useState([]);
 
@@ -47,9 +49,15 @@ function Kanban() {
   };
 
   return (
-    <DndContext onDragEnd={handleDragEnd}>
-      <Board columns={columns} setColumns={setColumns} />
-    </DndContext>
+    <section className={styles.containerKanban}>
+        <Sidebar />
+        <div className={styles.flexKanban}>
+        <Navbar/>
+        <DndContext onDragEnd={handleDragEnd}>
+            <Board columns={columns} setColumns={setColumns} />
+        </DndContext>
+        </div>
+    </section>
   );
 }
 

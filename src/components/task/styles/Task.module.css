@@ -1,6 +1,6 @@
 .task {
-  background-color: #f8f9fa;
-  border: 1px solid #ccc;
+  background-color: var(--color-primary);
+  border: 1px solid var(--color-primary);
   padding: 12px;
   border-radius: 6px;
   margin-bottom: 10px;

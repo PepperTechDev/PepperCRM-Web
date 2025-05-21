@@ -7,7 +7,7 @@ function Column({ column }) {
 
   return (
     <div className={styles.column}ref={setNodeRef}>
-      <h3>{column.title}</h3>
+      <h3 className={styles.title}>{column.title}</h3>
       {column.tasks.map(task => (
         <Task key={task.id} task={task} />
       ))}
