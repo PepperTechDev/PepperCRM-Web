@@ -1,7 +1,7 @@
 import styles from"../styles/User.module.css";
 import Sidebar from "../../../components/sidebar/pages/Sidebar";
 import Navbar from "../../../components/navbar/pages/Navbar";
-import Profile from "./profile";  
+import Profile from "./Profile";  
 
 function User() {
   return (
