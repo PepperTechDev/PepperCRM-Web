@@ -13,3 +13,19 @@
   cursor: grabbing;
   background-color: #e2e6ea;
 }
+
+.taskActions {
+  display: flex;
+  gap: 16px;
+  margin-left: auto;
+}
+.iconBtn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  color: var(--third-color);
+  margin-top: 12px;
+}
