@@ -1,15 +1,21 @@
-import Column from '../column/column';
-import styles from './Board.module.css';
-import Swal from 'sweetalert2';
-import { Cross } from 'lucide-react';
+import Column from "../column/column";
+import styles from "./Board.module.css";
+import Swal from "sweetalert2";
+import { Plus } from "lucide-react";
 
-function Board({ columns, setColumns, onEditTitle, onDeleteColumn }) {
+function Board({
+  columns,
+  setColumns,
+  onEditTitle,
+  onDeleteColumn,
+  onAddTask,
+}) {
   const handleAddColumn = async () => {
     const { value: title } = await Swal.fire({
-      title: 'Add New Column',
-      input: 'text',
-      inputLabel: 'Column name',
-      inputPlaceholder: 'Enter column title',
+      title: "Add New Column",
+      input: "text",
+      inputLabel: "Column name",
+      inputPlaceholder: "Enter column title",
       showCancelButton: true,
     });
 
@@ -19,25 +25,30 @@ function Board({ columns, setColumns, onEditTitle, onDeleteColumn }) {
         title,
         tasks: [],
       };
-      setColumns(prev => [...prev, newColumn]);
-    }
-    else if(title === '') {
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'You need to enter a column name!',
-        });
+      setColumns((prev) => [...prev, newColumn]);
+    } else if (title === "") {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "You need to enter a column name!",
+      });
     }
   };
 
   return (
     <div className={styles.boardContainer}>
       <div className={styles.board}>
-        {columns.map(column => (
-          <Column key={column.id} column={column} onEditTitle={onEditTitle} onDeleteColumn={onDeleteColumn}/>
+        {columns.map((column) => (
+          <Column
+            key={column.id}
+            column={column}
+            onEditTitle={onEditTitle}
+            onDeleteColumn={onDeleteColumn}
+            onAddTask={onAddTask} // <-- pasa la función
+          />
         ))}
         <button className={styles.addButton} onClick={handleAddColumn}>
-          ➕ Add Column
+           <Plus size={16} />  Add Column
         </button>
       </div>
     </div>
