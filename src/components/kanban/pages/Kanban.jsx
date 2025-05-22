@@ -125,6 +125,50 @@ function Kanban() {
     }
   };
 
+  const handleEditTask = async (columnId, task) => {
+    const { value: content } = await Swal.fire({
+      title: "Edit card",
+      input: "text",
+      inputValue: task.content,
+      showCancelButton: true,
+      inputValidator: (value) => !value && "The content cannot be empty",
+    });
+    if (content && content !== task.content) {
+      setColumns(cols =>
+        cols.map(col =>
+          col.id === columnId
+            ? {
+                ...col,
+                tasks: col.tasks.map(t =>
+                  t.id === task.id ? { ...t, content } : t
+                ),
+              }
+            : col
+        )
+      );
+    }
+  };
+
+  const handleDeleteTask = async (columnId, task) => {
+    const { isConfirmed } = await Swal.fire({
+      title: "Delete card?",
+      text: "This action cannot be undone.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete",
+      cancelButtonText: "Cancel",
+    });
+    if (isConfirmed) {
+      setColumns(cols =>
+        cols.map(col =>
+          col.id === columnId
+            ? { ...col, tasks: col.tasks.filter(t => t.id !== task.id) }
+            : col
+        )
+      );
+    }
+  };
+
   return (
     <section className={styles.containerKanban}>
         <Sidebar />
@@ -137,6 +181,8 @@ function Kanban() {
               onEditTitle={handleEditColumnTitle}
               onDeleteColumn={handleDeleteColumn}
               onAddTask={handleAddTask}
+              onEditTask={handleEditTask}
+              onDeleteTask={handleDeleteTask}
             />
         </DndContext>
         </div>
