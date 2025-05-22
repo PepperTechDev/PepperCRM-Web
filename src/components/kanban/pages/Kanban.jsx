@@ -6,6 +6,8 @@ import Navbar from '../../navbar/pages/Navbar';
 import Sidebar from '../../sidebar/pages/Sidebar';
 import styles from '../styles/Kanban.module.css';
 import Swal from 'sweetalert2';
+import { initialData } from '../../placeholderdata';
+
 
 function Kanban() {
   const [columns, setColumns] = useState([]);
@@ -107,13 +109,35 @@ function Kanban() {
     setColumns(newColumns);
   };
 
+  const handleAddTask = (columnId, newTask) => {
+    setColumns(cols =>
+      cols.map(col =>
+        col.id === columnId
+          ? { ...col, tasks: [...col.tasks, newTask] }
+          : col
+      )
+    );
+
+    // Actualiza también el initialData en memoria
+    const colIndex = initialData.findIndex(col => col.id === columnId);
+    if (colIndex !== -1) {
+      initialData[colIndex].tasks.push(newTask);
+    }
+  };
+
   return (
     <section className={styles.containerKanban}>
         <Sidebar />
         <div className={styles.flexKanban}>
         <Navbar/>
         <DndContext onDragEnd={handleDragEnd}>
-            <Board columns={columns} setColumns={setColumns} onEditTitle={handleEditColumnTitle} onDeleteColumn={handleDeleteColumn}/>
+            <Board
+              columns={columns}
+              setColumns={setColumns}
+              onEditTitle={handleEditColumnTitle}
+              onDeleteColumn={handleDeleteColumn}
+              onAddTask={handleAddTask}
+            />
         </DndContext>
         </div>
     </section>
