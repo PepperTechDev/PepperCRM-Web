@@ -9,6 +9,8 @@ function Board({
   onEditTitle,
   onDeleteColumn,
   onAddTask,
+  onEditTask,
+  onDeleteTask,
 }) {
   const handleAddColumn = async () => {
     const { value: title } = await Swal.fire({
@@ -44,7 +46,9 @@ function Board({
             column={column}
             onEditTitle={onEditTitle}
             onDeleteColumn={onDeleteColumn}
-            onAddTask={onAddTask} // <-- pasa la función
+            onAddTask={onAddTask}
+            onEditTask={onEditTask}
+            onDeleteTask={onDeleteTask}
           />
         ))}
         <button className={styles.addButton} onClick={handleAddColumn}>
