@@ -1,10 +1,10 @@
 import { useDroppable } from "@dnd-kit/core";
 import Task from "../../task/pages/Task";
 import styles from "./Column.module.css";
-import { CircleX, Pencil, Plus } from "lucide-react";
+import { CircleX, Pencil, Plus, Trash2 } from "lucide-react";
 import Swal from "sweetalert2";
 
-function Column({ column, onEditTitle, onDeleteColumn, onAddTask }) {
+function Column({ column, onEditTitle, onDeleteColumn, onAddTask, onEditTask, onDeleteTask }) {
   const { setNodeRef } = useDroppable({ id: column.id });
 
   const handleAddTask = async () => {
@@ -40,7 +40,12 @@ function Column({ column, onEditTitle, onDeleteColumn, onAddTask }) {
       </div>
       <div>
         {column.tasks.map((task) => (
-          <Task key={task.id} task={task} />
+          <Task
+            key={task.id}
+            task={task}
+            onEditTask={(t) => onEditTask(column.id, t)}
+            onDeleteTask={(t) => onDeleteTask(column.id, t)}
+          />
         ))}
       </div>
       <button className={styles.addTaskBtn} onClick={handleAddTask}>
