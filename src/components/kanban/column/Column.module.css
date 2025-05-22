@@ -10,12 +10,45 @@
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-.column h3 {
-  background-color: var(--color-secondary);
-  margin-bottom: 12px;
-  font-size: 20 rem;
+.title {
+  flex-grow: 1;
   text-align: center;
-  color: #333;
-  border-bottom: 1px solid #ddd;
-  padding-bottom: 8px;
+  margin: 0;
+}
+
+.header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem;
+  border-bottom: #2a9b8f 3px solid;
+}
+
+.actions{
+  display: flex;
+  gap: 0.5rem;
+}
+
+.updateBtn{
+  background-color: #2a9b8f;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+.updateBtn:hover{
+  background-color: #1f7a6d;
+}
+.deleteBtn{
+  background-color: #ff4d4d;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.deleteBtn:hover{
+  background-color: #e63946;
 }
