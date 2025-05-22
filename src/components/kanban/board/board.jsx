@@ -37,7 +37,7 @@ function Board({ columns, setColumns, onEditTitle, onDeleteColumn }) {
           <Column key={column.id} column={column} onEditTitle={onEditTitle} onDeleteColumn={onDeleteColumn}/>
         ))}
         <button className={styles.addButton} onClick={handleAddColumn}>
-          <Cross color='white' />
+          <Cross color='green' />
         </button>
       </div>
     </div>

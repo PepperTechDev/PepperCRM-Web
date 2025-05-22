@@ -6,13 +6,9 @@
   min-height: 100vh;
 }
 .addButton {
-  background-color: #2a9b8f;
+  background-color: var(--color-background);
   padding: 10px 20px;
-  border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
-  border: black 2px solid;
-}
-.addButton:hover {
-  background-color: #1f7a6d;
+  border: none;
 }
