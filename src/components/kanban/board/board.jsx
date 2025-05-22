@@ -1,8 +1,9 @@
 import Column from '../column/column';
 import styles from './Board.module.css';
 import Swal from 'sweetalert2';
+import { Cross } from 'lucide-react';
 
-function Board({ columns, setColumns }) {
+function Board({ columns, setColumns, onEditTitle, onDeleteColumn }) {
   const handleAddColumn = async () => {
     const { value: title } = await Swal.fire({
       title: 'Add New Column',
@@ -33,10 +34,10 @@ function Board({ columns, setColumns }) {
     <div className={styles.boardContainer}>
       <div className={styles.board}>
         {columns.map(column => (
-          <Column key={column.id} column={column} />
+          <Column key={column.id} column={column} onEditTitle={onEditTitle} onDeleteColumn={onDeleteColumn}/>
         ))}
         <button className={styles.addButton} onClick={handleAddColumn}>
-          ➕ Add Column
+          <Cross color='white' />
         </button>
       </div>
     </div>
