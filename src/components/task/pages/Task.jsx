@@ -8,15 +8,15 @@ function Task({ task, onEditTask, onDeleteTask }) {
   });
 
   return (
-    <div
-      ref={setNodeRef}
-      className={styles.task}
-      style={{ cursor: "grab" }}
-    >
-      {/* Solo el texto es draggable */}
+    <div ref={setNodeRef} className={styles.task} style={{ cursor: "grab" }}>
       <span {...listeners} {...attributes} style={{ flex: 1, cursor: "grab" }}>
         {task.content}
       </span>
+      {task.dueDate && (
+        <div className={styles.dueDate}>
+          <span>Due: {new Date(task.dueDate).toLocaleString()}</span>
+        </div>
+      )}
       <div className={styles.taskActions}>
         <button
           className={styles.iconBtn}
