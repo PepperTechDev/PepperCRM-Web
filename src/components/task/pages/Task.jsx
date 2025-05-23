@@ -3,12 +3,15 @@ import { Pencil, Trash2 } from "lucide-react";
 import styles from "./../styles/Task.module.css";
 
 function Task({ task, onEditTask, onDeleteTask }) {
-  const { attributes, listeners, setNodeRef } = useDraggable({
+  const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: task.id,
   });
+    const style = {
+    transform: transform ? `translate(${transform.x}px, ${transform.y}px)` : '',
+  };
 
   return (
-    <div ref={setNodeRef} className={styles.task} style={{ cursor: "grab" }}>
+    <div ref={setNodeRef} className={styles.task} style={{ cursor: "grab", ...style }}>
       <span {...listeners} {...attributes} style={{ flex: 1, cursor: "grab" }}>
         {task.content}
       </span>
