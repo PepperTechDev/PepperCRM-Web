@@ -33,8 +33,8 @@ importers:
         specifier: 'file:'
         version: 'file:'
       pnpm:
-        specifier: ^10.7.0
-        version: 10.8.0
+        specifier: ^10.10.0
+        version: 10.10.0
       prop-types:
         specifier: ^15.8.1
         version: 15.8.1
@@ -908,12 +908,11 @@ packages:
   picocolors@1.1.1:
     resolution: {integrity: sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA==}
 
+  pnpm@10.10.0:
+    resolution: {integrity: sha512-1hXbJG/nDyXc/qbY1z3ueCziPiJF48T2+Igkn7VoFJMYY33Kc8LFyO8qTKDVZX+5VnGIv6tH9WbR7mzph4FcOQ==}
   picomatch@4.0.2:
     resolution: {integrity: sha512-M7BAV6Rlcy5u+m6oPhAPFgJTzAioX/6B0DxyvDlo9l8+T3nLKbrczg2WLUyzd45L8RqfUMyGPzekbMvX2Ldkwg==}
     engines: {node: '>=12'}
-
-  pnpm@10.8.0:
-    resolution: {integrity: sha512-DoJxTRtbQ8dGEBk8sgc0iXwdAN6J0OGEIK68WXf6E9eAqcsFc0Yk6B69gcyHbNRkeUhQZBxIuVRDJrViLKKZcQ==}
     engines: {node: '>=18.12'}
     hasBin: true
 
@@ -1770,10 +1769,9 @@ snapshots:
       '@dnd-kit/modifiers': 9.0.0(@dnd-kit/core@6.3.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)
       '@dnd-kit/sortable': 10.0.0(@dnd-kit/core@6.3.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)
       axios: 1.8.4
-      jwt-decode: 4.0.0
-      lucide-react: 0.487.0(react@19.1.0)
-      multiselect-react-dropdown: 2.0.25(react@19.1.0)
-      pnpm: 10.8.0
+      lucide-react: 0.487.0(react@19.0.0)
+      multiselect-react-dropdown: 2.0.25(react@19.0.0)
+      pnpm: 10.10.0
       prop-types: 15.8.1
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
@@ -1784,10 +1782,8 @@ snapshots:
       - debug
 
   picocolors@1.1.1: {}
-
+  pnpm@10.10.0: {}
   picomatch@4.0.2: {}
-
-  pnpm@10.8.0: {}
 
   postcss@8.5.3:
     dependencies:
