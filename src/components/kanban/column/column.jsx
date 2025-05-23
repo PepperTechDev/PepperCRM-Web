@@ -8,14 +8,31 @@ function Column({ column, onEditTitle, onDeleteColumn, onAddTask, onEditTask, on
   const { setNodeRef } = useDroppable({ id: column.id });
 
   const handleAddTask = async () => {
-    const { value: content } = await Swal.fire({
+    const { value: formValues } = await Swal.fire({
       title: "New Card",
-      input: "text",
-      inputPlaceholder: "Write...",
+      html: `
+        <input type="text" id="taskContent" class="swal2-input" placeholder="Task content" />
+        <input type="datetime-local" id="taskDueDate" class="swal2-input" />
+      `,
+      focusConfirm: false,
+      preConfirm: () => {
+        const content = document.getElementById("taskContent").value;
+        const dueDate = document.getElementById("taskDueDate").value;
+        if (!content) {
+          Swal.showValidationMessage("Task content cannot be empty");
+          return null;
+        }
+        return { content, dueDate: dueDate ? new Date(dueDate).toISOString() : null };
+      },
       showCancelButton: true,
     });
-    if (content) {
-      onAddTask(column.id, { id: `task-${Date.now()}`, content }); // Usa 'content'
+
+    if (formValues) {
+      onAddTask(column.id, {
+        id: `task-${Date.now()}`,
+        content: formValues.content,
+        dueDate: formValues.dueDate,
+      });
     }
   };
 
