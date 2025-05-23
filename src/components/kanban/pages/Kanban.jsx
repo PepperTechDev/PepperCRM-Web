@@ -7,6 +7,8 @@ import Sidebar from '../../sidebar/pages/Sidebar';
 import styles from '../styles/Kanban.module.css';
 import Swal from 'sweetalert2';
 import { initialData } from '../../placeholderdata';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 
 function Kanban() {
@@ -126,21 +128,37 @@ function Kanban() {
   };
 
   const handleEditTask = async (columnId, task) => {
-    const { value: content } = await Swal.fire({
-      title: "Edit card",
-      input: "text",
-      inputValue: task.content,
+    const { value: formValues } = await Swal.fire({
+      title: "Edit Card",
+      html: `
+        <input type="text" id="taskContent" class="swal2-input" value="${task.content}" />
+        <input type="datetime-local" id="taskDueDate" class="swal2-input" value="${
+          task.dueDate ? new Date(task.dueDate).toISOString().slice(0, 16) : ""
+        }" />
+      `,
+      focusConfirm: false,
+      preConfirm: () => {
+        const content = document.getElementById("taskContent").value;
+        const dueDate = document.getElementById("taskDueDate").value;
+        if (!content) {
+          Swal.showValidationMessage("Task content cannot be empty");
+          return null;
+        }
+        return { content, dueDate: dueDate ? new Date(dueDate).toISOString() : null };
+      },
       showCancelButton: true,
-      inputValidator: (value) => !value && "The content cannot be empty",
     });
-    if (content && content !== task.content) {
-      setColumns(cols =>
-        cols.map(col =>
+  
+    if (formValues) {
+      setColumns((cols) =>
+        cols.map((col) =>
           col.id === columnId
             ? {
                 ...col,
-                tasks: col.tasks.map(t =>
-                  t.id === task.id ? { ...t, content } : t
+                tasks: col.tasks.map((t) =>
+                  t.id === task.id
+                    ? { ...t, content: formValues.content, dueDate: formValues.dueDate }
+                    : t
                 ),
               }
             : col
@@ -163,6 +181,36 @@ function Kanban() {
         cols.map(col =>
           col.id === columnId
             ? { ...col, tasks: col.tasks.filter(t => t.id !== task.id) }
+            : col
+        )
+      );
+    }
+  };
+
+  const handleSetDueDate = async (columnId, task) => {
+    const { value: dueDate } = await Swal.fire({
+      title: "Set Due Date",
+      html: `
+        <input type="datetime-local" id="dueDate" class="swal2-input" />
+      `,
+      focusConfirm: false,
+      preConfirm: () => {
+        const input = document.getElementById("dueDate");
+        return input.value ? new Date(input.value) : null;
+      },
+      showCancelButton: true,
+    });
+  
+    if (dueDate) {
+      setColumns(cols =>
+        cols.map(col =>
+          col.id === columnId
+            ? {
+                ...col,
+                tasks: col.tasks.map(t =>
+                  t.id === task.id ? { ...t, dueDate } : t
+                ),
+              }
             : col
         )
       );
