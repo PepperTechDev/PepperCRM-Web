@@ -1,23 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { Navigate, Outlet } from "react-router-dom";
-import { verifyToken } from '../features/auth/services/authService';
-import { getToken} from "../features/auth/services/authService";
-
-
+import { verifyToken, getToken } from "../features/auth/services/authService";
 
 const isAuthenticated = async () => {
   const token = getToken();
   if (!token) return false;
 
-    try {
-        // Verifica el token con el backend
-        await verifyToken(token);
-        return true; // El token es válido
-    } catch (error) {
-        console.error("Token inválido:", error);
-        return false; // El token no es válido
-    }
-
+  try {
+    // Verifica el token con el backend
+    await verifyToken(token);
+    return true; // El token es válido
+  } catch (error) {
+    console.error("Token inválido:", error);
+    return false; // El token no es válido
+  }
 };
 
 // Componente PrivateRoute
@@ -27,7 +23,7 @@ const PrivateRoute = ({ children }) => {
     const checkAuth = async () => {
       const auth = await isAuthenticated();
       setIsAuth(auth);
-    };  
+    };
     checkAuth();
   }, []);
 

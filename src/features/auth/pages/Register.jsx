@@ -1,27 +1,36 @@
 import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom"; // Importa Link para la navegación
-import { login } from "../services/authService";
+import { useNavigate } from "react-router-dom";
+import { register } from "../services/authService";
 import logo from "../../../assets/images/PapperTech_logo_colored_text.png";
 import Input from "../../../components/forms/pages/Input";
 import styles from "../styles/Auth.module.css";
 
-const Login = () => {
+const Register = () => {
+  const [name, setName] = useState("");
+  const [lastname, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [role, ] = useState("USER"); // Valor por defecto
+
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Evita el comportamiento por defecto del formulario
     setError("");
-
     try {
-      const data = await login({ email, password });
+      const data = await register({
+        name,
+        lastname,
+        email,
+        password,
+        role,
+      });
       if (data.token) {
-        navigate("/leads"); // Redirige al módulo principal
+        navigate("/"); // Redirige al módulo principal
       }
     } catch (err) {
-      setError("Credenciales inválidas: " + err.message);
+      setError("No fue posible registrarse: " + err.message);
     }
   };
 
@@ -36,13 +45,31 @@ const Login = () => {
 
       {/* Sección del formulario */}
       <div className={styles.formSection}>
-        <h2>Log In</h2>
+        <h2>Register</h2>
         {error && (
           <p className={styles.error} style={{ color: "red" }}>
             {error}
           </p>
         )}
         <form onSubmit={handleSubmit}>
+          <div className={styles.nameContainer}>
+            <Input
+              label="Name"
+              name="name"
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+            <Input
+              label="last Name"
+              name="lastName"
+              type="text"
+              value={lastname}
+              onChange={(e) => setLastName(e.target.value)}
+              required
+            />
+          </div>
           <Input
             label="Email"
             name="email"
@@ -63,17 +90,14 @@ const Login = () => {
             It must be a combination of at least 8 letters, numbers, and
             symbols.
           </p>
-          <div className={styles.links}>
-            <a href="#">Forgot Password?</a>
-          </div>
+
           <button className={styles.submit} type="submit">
-            Log In
+            Register
           </button>
         </form>
-        <p className={styles.infoText}>Don't have an account? <Link to="/register" className={styles.registerLink}>Register here</Link> </p>
       </div>
     </div>
   );
 };
 
-export default Login;
+export default Register;

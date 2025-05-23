@@ -1,6 +1,7 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "../features/auth/pages/Login";
+import Register from "../features/auth/pages/Register";
 import PrivateRoute from "./PrivateRoute";
 import Leads from "../features/leads/pages/leads";
 import Contacts from "../features/contacts/pages/Contacts";
@@ -8,7 +9,8 @@ import Products from "../features/products/pages/Products";
 import Quotes from "../features/quotes/pages/Quotes";
 import Vendors from "../features/vendors/pages/Vendors";
 import NotFound from "../pages/notFound/pages/NotFound";
-
+import Kanban from "../components/kanban/pages/Kanban";
+import User from "../features/user/pages/User";
 
 
 const protectedRoutes = [
@@ -29,8 +31,11 @@ const AppRoutes = () => {
       {/* Ruta pública */}
       <Route path="/" element={<Login />} />
       <Route path="login" element={<Login />} />
+      <Route path="register" element={<Register />} />
       <Route path="leads/all" element={<Leads />} />
+      <Route path="task" element={<Kanban />} />
       <Route path="notFound" element={<NotFound />} />
+      <Route path="profile/edit" element={<User />} />
 
 
 
