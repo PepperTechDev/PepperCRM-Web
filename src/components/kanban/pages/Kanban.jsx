@@ -59,7 +59,7 @@ function Kanban() {
   const handleDeleteColumn = async (columnId) => {
     const { isConfirmed } = await Swal.fire({
       title: 'Are you sure?',
-      text: 'This action cannot be undone.',
+
       icon: 'warning',
       showCancelButton: true,
     });

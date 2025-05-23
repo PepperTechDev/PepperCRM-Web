@@ -16,6 +16,12 @@ export const createUser = async (User) => {
 }
 
 export const updateUser = async (id, userData) => {
-  const response = await api.put(`/Users/id/${id}`, userData);
-  return response.data;
+  try {
+    const response = await api.put(`/Users/Update/${id}`, userData);
+    return response.data;
+  } catch (error) {
+
+    const msg = error.response?.data?.message || "Error desconocido";
+    throw new Error(msg);
+  }
 };

@@ -1,22 +1,27 @@
 import { useEffect, useState } from "react";
 import { getUser, updateUser } from "../services/UserService";
 import styles from "../styles/User.module.css";
-
-const USER_ID = localStorage.getItem("userId");
-
+let USER_ID = null;
 function Profile() {
   const [profile, setProfile] = useState(null);
   const [edit, setEdit] = useState(false);
-  const [form, setForm] = useState({ name: "", email: "" });
+  const [form, setForm] = useState({ name: "", email: "" ,password: "", role: "USER"});
   const [error, setError] = useState("");
-
+  
   // Traer datos del perfil al montar
   useEffect(() => {
     const fetchUser = async () => {
       try {
+        USER_ID = localStorage.getItem("userId");
         const user = await getUser(USER_ID);
         setProfile(user);
-        setForm({ name: user.name, email: user.email });
+        setForm((prev) => ({
+          ...prev,
+          name: user.name,
+          email: user.email,
+          // Si user.role existe, úsalo; si no, mantén "USER"
+          role: user.role || prev.role
+        }));
       } catch (err) {
         setError("No fue posible obtener el perfil: " + err.message);
       }
@@ -37,7 +42,7 @@ function Profile() {
       setProfile(updated);
       setEdit(false);
     } catch (err) {
-      setError("No fue posible actualizar el perfil: " + err.message);
+      setError("Couldn't update the profile: " + err.message);
     }
   };
 
@@ -70,7 +75,6 @@ function Profile() {
               required
             />
           </label>
-          <br />
           <label>
             Email:
             <input
@@ -80,6 +84,16 @@ function Profile() {
               required
               type="email"
             />
+          <label>
+            Password:
+            <input
+              type="text"
+              name="password"
+              value={form.password}
+              onChange={handleChange}
+              required
+            />
+          </label>
           </label>
           <br />
           <button type="submit">Save</button>
