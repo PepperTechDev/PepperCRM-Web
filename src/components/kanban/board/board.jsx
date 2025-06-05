@@ -16,6 +16,7 @@ function Board({
   onAddTask,
   onEditTask,
   onDeleteTask,
+  onCopyTask,
 }) {
   const { setNodeRef } = useDroppable({
     id: "board", // Necesario para que actúe como área de drop
@@ -62,6 +63,7 @@ function Board({
               onAddTask={onAddTask}
               onEditTask={onEditTask}
               onDeleteTask={onDeleteTask}
+              onCopyTask={onCopyTask}
             />
           ))}
         </SortableContext>
