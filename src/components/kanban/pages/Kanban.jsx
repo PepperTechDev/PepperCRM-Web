@@ -9,6 +9,11 @@ import Swal from 'sweetalert2';
 import { initialData } from '../../placeholderdata';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import {
+  updateColumnTitle,
+  deleteColumn as deleteColumnApi,
+  reorderColumns,
+} from '../service/kanbanService';
 
 
 function Kanban() {
@@ -43,8 +48,7 @@ function Kanban() {
   // Uncomment the following lines to enable the API call for updating the column title
 
    try {
-  //   await axios.put(`/api/columns/${columnId}`, { title: newTitle });
-
+      // await updateColumnTitle(columnId, newTitle);
      const updatedColumns = columns.map((col) =>
        col.id === columnId ? { ...col, title: newTitle } : col
      );
@@ -68,7 +72,7 @@ function Kanban() {
     if (isConfirmed) {
       try {
         // Uncomment the following line to enable the API call for deleting the column
-        // await axios.delete(`/api/columns/${columnId}`);
+        // await deleteColumnApi(columnId);
 
         const updatedColumns = columns.filter((col) => col.id !== columnId);
         setColumns(updatedColumns);
@@ -81,35 +85,50 @@ function Kanban() {
     }
   }
 
-  const handleDragEnd = (event) => {
-    const { active, over } = event;
-    if (!over || active.id === over.id) return;
 
-    const fromColumnIndex = columns.findIndex(col =>
-      col.tasks.some(task => task.id === active.id)
-    );
-    const toColumnIndex = columns.findIndex(col => col.id === over.id);
+const handleDragEnd = (event) => {
+  const { active, over } = event;
+  if (!over || active.id === over.id) return;
 
-    if (fromColumnIndex === -1 || toColumnIndex === -1) return;
+  const activeColumnIndex = columns.findIndex(col => col.id === active.id);
+  const overColumnIndex = columns.findIndex(col => col.id === over.id);
 
-    const fromColumn = columns[fromColumnIndex];
-    
-    const toColumn = columns[toColumnIndex];
-    //if the columns are the same, do nothing
-    if (fromColumn === toColumn) return;
-
-    const task = fromColumn.tasks.find(task => task.id === active.id);
-    //TODO implement here axios.put and update the status of the toColumn
-
-    const updatedFromTasks = fromColumn.tasks.filter(t => t.id !== active.id);
-    const updatedToTasks = [...toColumn.tasks, task];
-
+  if (activeColumnIndex !== -1 && overColumnIndex !== -1) {
     const newColumns = [...columns];
-    newColumns[fromColumnIndex] = { ...fromColumn, tasks: updatedFromTasks };
-    newColumns[toColumnIndex] = { ...toColumn, tasks: updatedToTasks };
-
+    const [movedColumn] = newColumns.splice(activeColumnIndex, 1);
+    newColumns.splice(overColumnIndex, 0, movedColumn);
+    //place here the axios function to update the column order in the backend
+    
     setColumns(newColumns);
-  };
+    return;
+  }
+
+
+  const fromColumnIndex = columns.findIndex(col =>
+    col.tasks.some(task => task.id === active.id)
+  );
+  const toColumnIndex = columns.findIndex(col =>
+    col.id === over.id || col.tasks.some(task => task.id === over.id)
+  );
+
+  //if didn't find the columns, return nothing
+  if (fromColumnIndex === -1 || toColumnIndex === -1) return;
+
+  const fromColumn = columns[fromColumnIndex];
+  const toColumn = columns[toColumnIndex];
+
+  const task = fromColumn.tasks.find(task => task.id === active.id);
+  if (!task || (fromColumn.id === toColumn.id)) return;
+
+  const updatedFromTasks = fromColumn.tasks.filter(t => t.id !== active.id);
+  const updatedToTasks = [...toColumn.tasks, task];
+
+  const newColumns = [...columns];
+  newColumns[fromColumnIndex] = { ...fromColumn, tasks: updatedFromTasks };
+  newColumns[toColumnIndex] = { ...toColumn, tasks: updatedToTasks };
+
+  setColumns(newColumns);
+};
 
   const handleAddTask = (columnId, newTask) => {
     setColumns(cols =>

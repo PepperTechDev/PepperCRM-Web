@@ -1,11 +1,17 @@
-import { useDroppable } from "@dnd-kit/core";
+import { useDroppable, useDraggable } from "@dnd-kit/core";
 import Task from "../../task/pages/Task";
 import styles from "./Column.module.css";
 import { CircleX, Pencil, Plus, Trash2 } from "lucide-react";
 import Swal from "sweetalert2";
 
 function Column({ column, onEditTitle, onDeleteColumn, onAddTask, onEditTask, onDeleteTask }) {
-  const { setNodeRef } = useDroppable({ id: column.id });
+  const { setNodeRef: setDraggableRef, attributes, listeners } = useDraggable({ id: column.id });
+  const { setNodeRef: setDroppableRef, isOver } = useDroppable({ id: column.id });
+
+  const setNodeRef = (node) => {
+    setDraggableRef(node);
+    setDroppableRef(node);
+  }
 
   const handleAddTask = async () => {
     const { value: formValues } = await Swal.fire({
@@ -37,9 +43,13 @@ function Column({ column, onEditTitle, onDeleteColumn, onAddTask, onEditTask, on
   };
 
   return (
-    <div className={styles.column} ref={setNodeRef}>
-      <div className={styles.header}>
-        <h3 className={styles.title}>{column.title}</h3>
+    <div className={styles.column} ref={setNodeRef}
+          style={{
+        backgroundColor: isOver ? "#e3f2fd" : "white", // Visual feedback de drop
+        transition: "background-color 0.2s ease-in-out",
+      }}>
+      <div className={styles.header} >
+        <h3 className={styles.title} {...attributes} {...listeners} style={{ cursor: "grab" }}>{column.title}</h3>
         <div className={styles.actions}>
           <button
             className={styles.updateBtn}
