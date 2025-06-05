@@ -14,7 +14,8 @@ import {
   deleteColumn as deleteColumnApi,
   reorderColumns,
 } from '../service/kanbanService';
-
+import { v4 as uuidv4 } from 'uuid';
+import axios from 'axios';
 
 function Kanban() {
   const [columns, setColumns] = useState([]);
@@ -206,6 +207,24 @@ const handleDragEnd = (event) => {
     }
   };
 
+  const handleCopyTask = async (columnId, task) => {
+    const id = uuidv4();
+    const newTask = {
+      ...task,
+      id: `task-${id}`, 
+      content: `${task.content} (Copy)`, // Modifica el contenido para indicar que es una copia
+    };
+    // add axios call to copy the task in the backend
+    
+    setColumns(cols =>
+      cols.map(col =>
+        col.id === columnId
+          ? { ...col, tasks: [...col.tasks, newTask] }
+          : col
+      )
+    );
+  }
+
   const handleSetDueDate = async (columnId, task) => {
     const { value: dueDate } = await Swal.fire({
       title: "Set Due Date",
@@ -250,6 +269,7 @@ const handleDragEnd = (event) => {
               onAddTask={handleAddTask}
               onEditTask={handleEditTask}
               onDeleteTask={handleDeleteTask}
+              onCopyTask={handleCopyTask}
             />
         </DndContext>
         </div>

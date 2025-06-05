@@ -1,8 +1,8 @@
 import { useDraggable } from "@dnd-kit/core";
-import { Pencil, Trash2 } from "lucide-react";
+import { Pencil, Trash2, Copy } from "lucide-react";
 import styles from "./../styles/Task.module.css";
 
-function Task({ task, onEditTask, onDeleteTask }) {
+function Task({ task, onEditTask, onDeleteTask , onCopyTask }) {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: task.id,
   });
@@ -40,6 +40,16 @@ function Task({ task, onEditTask, onDeleteTask }) {
           }}
         >
           <Trash2 size={16} />
+        </button>
+          <button
+          className={styles.iconBtn}
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            onCopyTask(task);
+          }}
+        >
+          <Copy size={16} />
         </button>
       </div>
     </div>

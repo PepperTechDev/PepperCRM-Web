@@ -4,7 +4,7 @@ import styles from "./Column.module.css";
 import { CircleX, Pencil, Plus, Trash2 } from "lucide-react";
 import Swal from "sweetalert2";
 
-function Column({ column, onEditTitle, onDeleteColumn, onAddTask, onEditTask, onDeleteTask }) {
+function Column({ column, onEditTitle, onDeleteColumn, onAddTask, onEditTask, onDeleteTask, onCopyTask }) {
   const { setNodeRef: setDraggableRef, attributes, listeners } = useDraggable({ id: column.id });
   const { setNodeRef: setDroppableRef, isOver } = useDroppable({ id: column.id });
 
@@ -45,7 +45,7 @@ function Column({ column, onEditTitle, onDeleteColumn, onAddTask, onEditTask, on
   return (
     <div className={styles.column} ref={setNodeRef}
           style={{
-        backgroundColor: isOver ? "#e3f2fd" : "white", // Visual feedback de drop
+        backgroundColor: isOver ? "#e3f2fd" : "white", // Visual feedback
         transition: "background-color 0.2s ease-in-out",
       }}>
       <div className={styles.header} >
@@ -72,6 +72,7 @@ function Column({ column, onEditTitle, onDeleteColumn, onAddTask, onEditTask, on
             task={task}
             onEditTask={(t) => onEditTask(column.id, t)}
             onDeleteTask={(t) => onDeleteTask(column.id, t)}
+            onCopyTask={(t) => onCopyTask(column.id, t)}
           />
         ))}
       </div>
