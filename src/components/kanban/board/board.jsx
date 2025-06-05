@@ -2,6 +2,11 @@ import Column from "../column/column";
 import styles from "./Board.module.css";
 import Swal from "sweetalert2";
 import { Plus } from "lucide-react";
+import { useDroppable } from "@dnd-kit/core";
+import {
+  SortableContext,
+  horizontalListSortingStrategy,
+} from "@dnd-kit/sortable";
 
 function Board({
   columns,
@@ -12,6 +17,10 @@ function Board({
   onEditTask,
   onDeleteTask,
 }) {
+  const { setNodeRef } = useDroppable({
+    id: "board", // Necesario para que actúe como área de drop
+  });
+
   const handleAddColumn = async () => {
     const { value: title } = await Swal.fire({
       title: "Add New Column",
@@ -39,20 +48,26 @@ function Board({
 
   return (
     <div className={styles.boardContainer}>
-      <div className={styles.board}>
-        {columns.map((column) => (
-          <Column
-            key={column.id}
-            column={column}
-            onEditTitle={onEditTitle}
-            onDeleteColumn={onDeleteColumn}
-            onAddTask={onAddTask}
-            onEditTask={onEditTask}
-            onDeleteTask={onDeleteTask}
-          />
-        ))}
+      <div className={styles.board} ref={setNodeRef}>
+        <SortableContext
+          items={columns.map((col) => col.id)}
+          strategy={horizontalListSortingStrategy}
+        >
+          {columns.map((column) => (
+            <Column
+              key={column.id}
+              column={column}
+              onEditTitle={onEditTitle}
+              onDeleteColumn={onDeleteColumn}
+              onAddTask={onAddTask}
+              onEditTask={onEditTask}
+              onDeleteTask={onDeleteTask}
+            />
+          ))}
+        </SortableContext>
+
         <button className={styles.addButton} onClick={handleAddColumn}>
-           <Plus size={16} />  Add Column
+          <Plus size={16} /> Add Column
         </button>
       </div>
     </div>
