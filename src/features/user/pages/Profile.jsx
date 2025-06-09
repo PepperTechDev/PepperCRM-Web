@@ -23,7 +23,7 @@ function Profile() {
           role: user.role || prev.role
         }));
       } catch (err) {
-        setError("No fue posible obtener el perfil: " + err.message);
+        setError("Could not fetch the profile: " + err.message);
       }
     };
     fetchUser();
@@ -47,7 +47,7 @@ function Profile() {
   };
 
   if (error) return <div>{error}</div>;
-  if (!profile) return <div>Cargando...</div>;
+  if (!profile) return <div>Loading...</div>;
 
   return (
     <div className={styles.profileBoard}>
