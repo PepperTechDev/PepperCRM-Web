@@ -30,7 +30,7 @@ const Register = () => {
         navigate("/"); // Redirige al módulo principal
       }
     } catch (err) {
-      setError("No fue posible registrarse: " + err.message);
+      setError("Registration failed: " + err.message);
     }
   };
 
@@ -62,7 +62,7 @@ const Register = () => {
               required
             />
             <Input
-              label="last Name"
+              label="Last Name"
               name="lastName"
               type="text"
               value={lastname}

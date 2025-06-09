@@ -11,7 +11,7 @@ const isAuthenticated = async () => {
     await verifyToken(token);
     return true; // El token es válido
   } catch (error) {
-    console.error("Token inválido:", error);
+    console.error("Invalid token:", error);
     return false; // El token no es válido
   }
 };
@@ -28,7 +28,7 @@ const PrivateRoute = ({ children }) => {
   }, []);
 
   // Mientras se verifica la autenticación, muestra un loader o nada
-  if (isAuth === null) return <div>Cargando...</div>;
+  if (isAuth === null) return <div>Loading...</div>;
 
   // Si no está autenticado, redirige al login
   if (!isAuth) return <Navigate to="/login" replace />;
