@@ -26,7 +26,7 @@ function LeadsRows() {
       const leadIndex = localLeads.findIndex((lead) => lead.Id === id);
       if (leadIndex !== -1) {
         localLeads[leadIndex].State = false;
-        alert("Lead deleted (logically) successfully!");
+        alert("Lead successfully deleted (logical deletion) ✅");
         const activeLeads = leads.filter((lead) => lead.State);
         setLocalLeads(activeLeads);
       }
@@ -53,7 +53,7 @@ function LeadsRows() {
       lead.Id === id ? updatedLead : lead
     );
     setLocalLeads(updated);
-    console.log("Lead actualizado:", updatedLead);
+    console.log("Lead updated:", updatedLead);
     alert("Lead updated locally ✅");
   };
 
@@ -69,21 +69,21 @@ function LeadsRows() {
 
     // Validar campos vacíos
     if (!Name || !Lastname || !Email || !Phone || !Service) {
-      alert("Todos los campos son obligatorios ❌");
+      alert("All fields are required ❌");
       return;
     }
 
     // Validar formato de email
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(Email)) {
-      alert("El correo electrónico no es válido ❌");
+      alert("Invalid email address ❌");
       return;
     }
 
     // Validar que el teléfono solo tenga números
     const phoneRegex = /^[0-9]+$/;
     if (!phoneRegex.test(Phone)) {
-      alert("El número de teléfono debe contener solo números ❌");
+      alert("Phone number must contain only numbers ❌");
       return;
     }
 
@@ -104,8 +104,8 @@ function LeadsRows() {
       Service: "",
     });
 
-    console.log("Nuevo lead añadido:", leadToAdd);
-    alert("Nuevo lead añadido ✅");
+    console.log("New lead added:", leadToAdd);
+    alert("New lead added ✅");
   };
 
   return (
@@ -222,7 +222,7 @@ function LeadsRows() {
             onClick={handleAddNewLead}
             style={{ cursor: "pointer", fontSize: "1.5rem" }}
           >
-            Crear 😈🙏🏻👅
+            Create 😈🙏🏻👅
           </a>
         </td>
       </tr>
