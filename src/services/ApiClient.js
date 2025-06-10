@@ -14,7 +14,7 @@ function getAuthToken() {
   try {
     return getToken();
   } catch (error) {
-    console.error('No fue posible optener el token:', error);
+    console.error('No authentication token was received:', error);
     return null;
   }
 }
@@ -41,7 +41,7 @@ ApiClient.interceptors.response.use(
       try {
         removeToken();
       } catch (e) {
-        console.warn('No se pudo eliminar el token:', e);
+        console.warn('Failed to remove token:', e);
       }
 
       // Retardo opcional para permitir el render de mensajes o loaders
