@@ -4,7 +4,7 @@ import styles from "./Column.module.css";
 import { CircleX, Pencil, Plus, Trash2 } from "lucide-react";
 import Swal from "sweetalert2";
 
-function Column({ column, onEditTitle, onDeleteColumn, onAddTask, onEditTask, onDeleteTask, onCopyTask }) {
+function Column({ column, onEditTitle, onDeleteColumn, onAddTask, onEditTask, onDeleteTask, onCopyTask, onViewComments }) {
   const { setNodeRef: setDraggableRef, attributes, listeners } = useDraggable({ id: column.id });
   const { setNodeRef: setDroppableRef, isOver } = useDroppable({ id: column.id });
 
@@ -73,6 +73,7 @@ function Column({ column, onEditTitle, onDeleteColumn, onAddTask, onEditTask, on
             onEditTask={(t) => onEditTask(column.id, t)}
             onDeleteTask={(t) => onDeleteTask(column.id, t)}
             onCopyTask={(t) => onCopyTask(column.id, t)}
+            onViewComments={(t) => onViewComments(t)}
           />
         ))}
       </div>

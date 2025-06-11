@@ -1,8 +1,9 @@
 import { useDraggable } from "@dnd-kit/core";
-import { Pencil, Trash2, Copy } from "lucide-react";
+import { Pencil, Trash2, Copy, MessageCircle } from "lucide-react";
+
 import styles from "./../styles/Task.module.css";
 
-function Task({ task, onEditTask, onDeleteTask , onCopyTask }) {
+function Task({ task, onEditTask, onDeleteTask , onCopyTask , onViewComments}) {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: task.id,
   });
@@ -51,6 +52,19 @@ function Task({ task, onEditTask, onDeleteTask , onCopyTask }) {
         >
           <Copy size={16} />
         </button>
+      
+        <button
+          className={styles.iconBtn}
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            // Handle comments logic here
+            onViewComments(task);
+          }}
+          >
+          <MessageCircle size={16} />
+        </button>
+        
       </div>
     </div>
   );

@@ -7,8 +7,11 @@ import Sidebar from '../../sidebar/pages/Sidebar';
 import styles from '../styles/Kanban.module.css';
 import Swal from 'sweetalert2';
 import { initialData } from '../../placeholderdata';
+import ReactDOMServer from 'react-dom/server';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import withReactContent from 'sweetalert2-react-content';
+
 import {
   updateColumnTitle,
   deleteColumn as deleteColumnApi,
@@ -255,6 +258,32 @@ const handleDragEnd = (event) => {
     }
   };
 
+const handleViewComments = (task) => {
+  const MySwal = withReactContent(Swal);
+  const html = ReactDOMServer.renderToString(
+    <div style={{ textAlign: 'left' }}>
+      {task.comments && task.comments.length > 0 ? (
+        <ul>
+          {task.comments.map((comment, idx) => (
+            <li key={idx}>
+              <strong>{comment.author}:</strong> {comment.comment}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No comments for this task.</p>
+      )}
+    </div>
+  );
+
+  MySwal.fire({
+    title: `Comments of "${task.content}"`,
+    html: html,
+    confirmButtonText: 'Close',
+    width: 600
+  });
+};
+
   return (
     <section className={styles.containerKanban}>
         <Sidebar />
@@ -270,6 +299,7 @@ const handleDragEnd = (event) => {
               onEditTask={handleEditTask}
               onDeleteTask={handleDeleteTask}
               onCopyTask={handleCopyTask}
+              onViewComments={handleViewComments}
             />
         </DndContext>
         </div>

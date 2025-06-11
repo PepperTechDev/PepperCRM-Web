@@ -56,6 +56,9 @@ importers:
       sweetalert2:
         specifier: ^11.21.2
         version: 11.21.2
+      sweetalert2-react-content:
+        specifier: ^5.1.0
+        version: 5.1.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sweetalert2@11.21.2)
       uuid:
         specifier: ^11.1.0
         version: 11.1.0
@@ -1040,6 +1043,13 @@ packages:
     resolution: {integrity: sha512-qpCAvRl9stuOHveKsn7HncJRvv501qIacKzQlO/+Lwxc9+0q2wLyv4Dfvt80/DPn2pqOBsJdDiogXGR9+OvwRw==}
     engines: {node: '>=8'}
 
+  sweetalert2-react-content@5.1.0:
+    resolution: {integrity: sha512-SBh41SdyHDY9NzwrIG6LACbClCMxIlEFP86tGVr/B4zGD4H2gGXB8o7UAJRc/RtBd/iQL9hIvuCAkrk0AgKEMA==}
+    peerDependencies:
+      react: ^18.0.0 || ^19.0.0
+      react-dom: ^18.0.0 || ^19.0.0
+      sweetalert2: ^11.0.0
+
   sweetalert2@11.21.2:
     resolution: {integrity: sha512-DNNFzx16LBQDZh7r5WOfeAfWZBdEdLHl3+tpO9Z1WWKMzdsgBgpLPBduJWVNMB283HYcm8ex99clLYXki21hdA==}
 
@@ -1849,6 +1859,7 @@ snapshots:
       react-hook-form: 7.55.0(react@19.1.0)
       react-router-dom: 7.5.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       sweetalert2: 11.21.2
+      uuid: 11.1.0
     transitivePeerDependencies:
       - debug
 
@@ -1957,6 +1968,12 @@ snapshots:
   supports-color@7.2.0:
     dependencies:
       has-flag: 4.0.0
+
+  sweetalert2-react-content@5.1.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sweetalert2@11.21.2):
+    dependencies:
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
+      sweetalert2: 11.21.2
 
   sweetalert2@11.21.2: {}
 
