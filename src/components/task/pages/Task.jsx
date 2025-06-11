@@ -12,9 +12,22 @@ function Task({ task, onEditTask, onDeleteTask , onCopyTask }) {
 
   return (
     <div ref={setNodeRef} className={styles.task} style={{ cursor: "grab", ...style }}>
-      <span {...listeners} {...attributes} style={{ flex: 1, cursor: "grab" }}>
-        {task.content}
-      </span>
+        <div
+      {...listeners}
+       {...attributes}
+      style={{ flex: 1, cursor: "grab" }}
+     >
+       {/* Si manejas título por separado */}
+       {task.title && (
+         <div className={styles.taskTitle}>{task.title}</div>
+       )}
+
+       {/* Descripción */}
+       {task.content && (
+        <div className={styles.taskDescription}>{task.content}</div>
+      )}
+       {/* Si en tu modelo usas `task.description` en lugar de `content`, sustitúyelo aquí */}
+    </div>
       {task.dueDate && (
         <div className={styles.dueDate}>
           <span>Due: {new Date(task.dueDate).toLocaleString()}</span>

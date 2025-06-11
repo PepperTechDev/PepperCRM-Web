@@ -1,3 +1,10 @@
+
+.formTitle {
+  font-size: 1.5rem;
+  color: var(--color-text);
+  margin-bottom: 16px;
+}
+
 .column {
   flex: 1;
   background-color: var(--color-background);
@@ -65,4 +72,97 @@
 }
 .addTaskBtn:hover {
   background: var(--color-primary-dark, var(--accent-color));
+}
+
+/* yourComponent.module.css */
+
+.addForm {
+  /* Estilos generales para el pop-up */
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  font-family: 'Arial', sans-serif; /* Define una fuente agradable */
+}
+
+.formMainTitle {
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 25px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.formGroup {
+  margin-bottom: 20px; /* Espacio entre cada campo */
+}
+
+.formLabel {
+  display: block; /* Asegura que la etiqueta esté en su propia línea */
+  margin-bottom: 8px;
+  font-size: 16px;
+  color: #555;
+  font-weight: 600;
+}
+
+.input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #333;
+  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.input:focus {
+  border-color: #007bff; /* Color al enfocar */
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+  outline: none; /* Elimina el contorno predeterminado del navegador */
+}
+
+.textarea {
+  min-height: 80px; /* Altura mínima para el textarea */
+  resize: vertical; /* Permite redimensionar verticalmente */
+}
+
+.btnConfirm {
+  background-color: var(--secondary-color); /* Un verde más agradable */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+  margin-right: 10px;
+}
+
+.btnConfirm:hover {
+  background-color: #218838;
+  transform: translateY(-1px);
+}
+
+.btnConfirm:active {
+  transform: translateY(0);
+}
+
+.btnCancel {
+  background-color: #dc3545; /* Un rojo para cancelar */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+}
+
+.btnCancel:hover {
+  background-color: #c82333;
+  transform: translateY(-1px);
+}
+
+.btnCancel:active {
+  transform: translateY(0);
 }

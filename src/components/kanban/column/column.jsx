@@ -4,52 +4,130 @@ import styles from "./Column.module.css";
 import { CircleX, Pencil, Plus, Trash2 } from "lucide-react";
 import Swal from "sweetalert2";
 
-function Column({ column, onEditTitle, onDeleteColumn, onAddTask, onEditTask, onDeleteTask, onCopyTask }) {
-  const { setNodeRef: setDraggableRef, attributes, listeners } = useDraggable({ id: column.id });
-  const { setNodeRef: setDroppableRef, isOver } = useDroppable({ id: column.id });
+function Column({
+  column,
+  onEditTitle,
+  onDeleteColumn,
+  onAddTask,
+  onEditTask,
+  onDeleteTask,
+  onCopyTask,
+}) {
+  const {
+    setNodeRef: setDraggableRef,
+    attributes,
+    listeners,
+  } = useDraggable({ id: column.id });
+  const { setNodeRef: setDroppableRef, isOver } = useDroppable({
+    id: column.id,
+  });
 
   const setNodeRef = (node) => {
     setDraggableRef(node);
     setDroppableRef(node);
-  }
+  };
+
+  // column.jsx (solo la parte de handleAddTask)
 
   const handleAddTask = async () => {
     const { value: formValues } = await Swal.fire({
       title: "New Card",
       html: `
-        <input type="text" id="taskContent" class="swal2-input" placeholder="Task content" />
-        <input type="datetime-local" id="taskDueDate" class="swal2-input" />
-      `,
+      <div class="${styles.formGroup}">
+        <label for="cardTitle" class="${styles.formLabel}">Title:</label>
+        <input
+          type="text"
+          id="cardTitle"
+          class="${styles.input}"
+          placeholder="Write the title of the card"
+        />
+      </div>
+      <div class="${styles.formGroup}">
+        <label for="cardDescription" class="${styles.formLabel}">Descripción:</label>
+        <textarea
+          id="cardDescription"
+          class="${styles.input} ${styles.textarea}"
+          placeholder="Add a detailed description"
+        ></textarea>
+      </div>
+      <div class="${styles.formGroup}">
+        <label for="cardDueDate" class="${styles.formLabel}">Deadline:</label>
+        <input
+          type="datetime-local"
+          id="cardDueDate"
+          class="${styles.input}"
+        />
+      </div>
+    `,
+      showCancelButton: true,
       focusConfirm: false,
+      confirmButtonText: "Add",
+      cancelButtonText: "Cancel",
+      customClass: {
+        popup: styles.addForm,
+        confirmButton: styles.btnConfirm,
+        cancelButton: styles.btnCancel,
+      },
+      buttonsStyling: false,
+      didOpen: () => {
+        const dueInput = Swal.getPopup().querySelector("#cardDueDate");
+        if (dueInput) {
+          // Impide fechas pasadas
+          dueInput.min = new Date().toISOString().slice(0, 16);
+        }
+      },
       preConfirm: () => {
-        const content = document.getElementById("taskContent").value;
-        const dueDate = document.getElementById("taskDueDate").value;
-        if (!content) {
-          Swal.showValidationMessage("Task content cannot be empty");
+        const titleEl = document.getElementById("cardTitle");
+        const descEl = document.getElementById("cardDescription");
+        const dueEl = document.getElementById("cardDueDate");
+
+        const title = titleEl.value.trim();
+        const description = descEl.value.trim();
+        const dueRaw        = dueEl.value;  
+       if (!title) {
+          Swal.showValidationMessage("Title cannot be empty");
           return null;
         }
-        return { content, dueDate: dueDate ? new Date(dueDate).toISOString() : null };
+        if (!description) {
+          Swal.showValidationMessage("Description cannot be empty");
+          return null;
+        }
+        return {
+          title,
+          description,
+          dueDate: dueRaw ? new Date(dueRaw).toISOString() : null,
+        };
       },
-      showCancelButton: true,
     });
 
-    if (formValues) {
+   if (formValues) {
       onAddTask(column.id, {
         id: `task-${Date.now()}`,
-        content: formValues.content,
-        dueDate: formValues.dueDate,
+        title:       formValues.title,
+        content:     formValues.description,  // tu componente Task usa `content`
+        dueDate:     formValues.dueDate
       });
     }
   };
 
   return (
-    <div className={styles.column} ref={setNodeRef}
-          style={{
+    <div
+      className={styles.column}
+      ref={setNodeRef}
+      style={{
         backgroundColor: isOver ? "#e3f2fd" : "white", // Visual feedback
         transition: "background-color 0.2s ease-in-out",
-      }}>
-      <div className={styles.header} >
-        <h3 className={styles.title} {...attributes} {...listeners} style={{ cursor: "grab" }}>{column.title}</h3>
+      }}
+    >
+      <div className={styles.header}>
+        <h3
+          className={styles.title}
+          {...attributes}
+          {...listeners}
+          style={{ cursor: "grab" }}
+        >
+          {column.title}
+        </h3>
         <div className={styles.actions}>
           <button
             className={styles.updateBtn}
@@ -61,7 +139,7 @@ function Column({ column, onEditTitle, onDeleteColumn, onAddTask, onEditTask, on
             className={styles.deleteBtn}
             onClick={() => onDeleteColumn(column.id)}
           >
-            <CircleX  />
+            <CircleX />
           </button>
         </div>
       </div>
