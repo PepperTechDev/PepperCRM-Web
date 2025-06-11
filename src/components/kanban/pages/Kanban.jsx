@@ -127,7 +127,18 @@ function Kanban() {
   const handleAddTask = (columnId, newTask) => {
     setColumns((cols) =>
       cols.map((col) =>
-        col.id === columnId ? { ...col, tasks: [...col.tasks, newTask] } : col
+        col.id === columnId
+          ? {
+              ...col,
+              tasks: [
+                ...col.tasks,
+                {
+                  ...newTask,
+                  checklist: [], // Initialize checklist for new tasks
+                },
+              ],
+            }
+          : col
       )
     );
 
@@ -201,6 +212,7 @@ function Kanban() {
                   t.id === task.id
                     ? {
                         ...t,
+                        title: formValues.title,
                         content: formValues.description,
                         dueDate: formValues.dueDate,
                       }
@@ -249,6 +261,105 @@ function Kanban() {
     );
   };
 
+  // New Checklist Handlers
+  const handleAddChecklistItem = (columnId, taskId, itemText) => {
+    setColumns((prevColumns) =>
+      prevColumns.map((col) =>
+        col.id === columnId
+          ? {
+              ...col,
+              tasks: col.tasks.map((task) =>
+                task.id === taskId
+                  ? {
+                      ...task,
+                      checklist: [
+                        ...(task.checklist || []), // Ensure checklist exists
+                        { id: uuidv4(), text: itemText, completed: false },
+                      ],
+                    }
+                  : task
+              ),
+            }
+          : col
+      )
+    );
+  };
+
+  const handleToggleChecklistItem = (columnId, taskId, checklistItemId) => {
+    setColumns((prevColumns) =>
+      prevColumns.map((col) =>
+        col.id === columnId
+          ? {
+              ...col,
+              tasks: col.tasks.map((task) =>
+                task.id === taskId
+                  ? {
+                      ...task,
+                      checklist: task.checklist.map((item) =>
+                        item.id === checklistItemId
+                          ? { ...item, completed: !item.completed }
+                          : item
+                      ),
+                    }
+                  : task
+              ),
+            }
+          : col
+      )
+    );
+  };
+
+  const handleEditChecklistItem = (
+    columnId,
+    taskId,
+    checklistItemId,
+    newText
+  ) => {
+    setColumns((prevColumns) =>
+      prevColumns.map((col) =>
+        col.id === columnId
+          ? {
+              ...col,
+              tasks: col.tasks.map((task) =>
+                task.id === taskId
+                  ? {
+                      ...task,
+                      checklist: task.checklist.map((item) =>
+                        item.id === checklistItemId
+                          ? { ...item, text: newText }
+                          : item
+                      ),
+                    }
+                  : task
+              ),
+            }
+          : col
+      )
+    );
+  };
+
+  const handleDeleteChecklistItem = (columnId, taskId, checklistItemId) => {
+    setColumns((prevColumns) =>
+      prevColumns.map((col) =>
+        col.id === columnId
+          ? {
+              ...col,
+              tasks: col.tasks.map((task) =>
+                task.id === taskId
+                  ? {
+                      ...task,
+                      checklist: task.checklist.filter(
+                        (item) => item.id !== checklistItemId
+                      ),
+                    }
+                  : task
+              ),
+            }
+          : col
+      )
+    );
+  };
+
   return (
     <section className={styles.containerKanban}>
       <Sidebar />
@@ -264,6 +375,10 @@ function Kanban() {
             onEditTask={handleEditTask}
             onDeleteTask={handleDeleteTask}
             onCopyTask={handleCopyTask}
+            onAddChecklistItem={handleAddChecklistItem}
+            onToggleChecklistItem={handleToggleChecklistItem}
+            onEditChecklistItem={handleEditChecklistItem}
+            onDeleteChecklistItem={handleDeleteChecklistItem}
           />
         </DndContext>
       </div>
