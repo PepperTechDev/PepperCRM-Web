@@ -26,7 +26,6 @@ function Task({ task, onEditTask, onDeleteTask , onCopyTask }) {
        {task.content && (
         <div className={styles.taskDescription}>{task.content}</div>
       )}
-       {/* Si en tu modelo usas `task.description` en lugar de `content`, sustitúyelo aquí */}
     </div>
       {task.dueDate && (
         <div className={styles.dueDate}>

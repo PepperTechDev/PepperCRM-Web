@@ -27,8 +27,6 @@ function Column({
     setDroppableRef(node);
   };
 
-  // column.jsx (solo la parte de handleAddTask)
-
   const handleAddTask = async () => {
     const { value: formValues } = await Swal.fire({
       title: "New Card",
@@ -83,8 +81,8 @@ function Column({
 
         const title = titleEl.value.trim();
         const description = descEl.value.trim();
-        const dueRaw        = dueEl.value;  
-       if (!title) {
+        const dueRaw = dueEl.value;
+        if (!title) {
           Swal.showValidationMessage("Title cannot be empty");
           return null;
         }
@@ -100,12 +98,12 @@ function Column({
       },
     });
 
-   if (formValues) {
+    if (formValues) {
       onAddTask(column.id, {
         id: `task-${Date.now()}`,
-        title:       formValues.title,
-        content:     formValues.description,  // tu componente Task usa `content`
-        dueDate:     formValues.dueDate
+        title: formValues.title,
+        content: formValues.description, // tu componente Task usa `content`
+        dueDate: formValues.dueDate,
       });
     }
   };
