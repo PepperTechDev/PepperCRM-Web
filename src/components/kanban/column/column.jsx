@@ -12,6 +12,10 @@ function Column({
   onEditTask,
   onDeleteTask,
   onCopyTask,
+  onAddChecklistItem,
+  onToggleChecklistItem,
+  onEditChecklistItem,
+  onDeleteChecklistItem,
 }) {
   const {
     setNodeRef: setDraggableRef,
@@ -41,7 +45,7 @@ function Column({
         />
       </div>
       <div class="${styles.formGroup}">
-        <label for="cardDescription" class="${styles.formLabel}">Descripción:</label>
+        <label for="cardDescription" class="${styles.formLabel}">Description:</label>
         <textarea
           id="cardDescription"
           class="${styles.input} ${styles.textarea}"
@@ -104,6 +108,7 @@ function Column({
         title: formValues.title,
         content: formValues.description, // tu componente Task usa `content`
         dueDate: formValues.dueDate,
+        checklist: [], // Initialize empty checklist for new tasks
       });
     }
   };
@@ -149,6 +154,10 @@ function Column({
             onEditTask={(t) => onEditTask(column.id, t)}
             onDeleteTask={(t) => onDeleteTask(column.id, t)}
             onCopyTask={(t) => onCopyTask(column.id, t)}
+             onAddChecklistItem={(itemText) => onAddChecklistItem(column.id, task.id, itemText)}
+            onToggleChecklistItem={(checklistItemId) => onToggleChecklistItem(column.id, task.id, checklistItemId)}
+            onEditChecklistItem={(checklistItemId, newText) => onEditChecklistItem(column.id, task.id, checklistItemId, newText)}
+            onDeleteChecklistItem={(checklistItemId) => onDeleteChecklistItem(column.id, task.id, checklistItemId)}
           />
         ))}
       </div>
