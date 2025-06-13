@@ -409,7 +409,7 @@ const handleViewComments = (task) => {
             onToggleChecklistItem={handleToggleChecklistItem}
             onEditChecklistItem={handleEditChecklistItem}
             onDeleteChecklistItem={handleDeleteChecklistItem}
-              onViewComments={handleViewComments}
+            onViewComments={handleViewComments}
           />
         </DndContext>
       </div>

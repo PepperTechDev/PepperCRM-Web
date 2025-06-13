@@ -77,7 +77,6 @@ function Board({
             />
           ))}
         </SortableContext>
-
         <button className={styles.addButton} onClick={handleAddColumn}>
           <Plus size={16} /> Add Column
         </button>
