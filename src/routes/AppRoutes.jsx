@@ -16,13 +16,13 @@ import User from "../features/user/pages/User";
 const protectedRoutes = [
   { path: "leads", element: <Leads /> },
   { path: "contacts", element: <Contacts /> },
-  { path: "deals", element: <h1>Ruta protegida</h1> },
+  { path: "deals", element: <h1>Protected route</h1> },
   { path: "products", element: <Products /> },
   { path: "vendors", element: <Vendors /> },
   { path: "quotes", element: <Quotes /> },
-  { path: "tasks", element: <h1>Ruta protegida</h1> },
-  { path: "calendar", element: <h1>Ruta protegida</h1> },
-  { path: "forms", element: <h1>Ruta protegida</h1> },
+  { path: "tasks", element: <h1>Protected route</h1> },
+  { path: "calendar", element: <h1>Protected route</h1> },
+  { path: "forms", element: <h1>Protected route</h1> },
 ];
 
 const AppRoutes = () => {

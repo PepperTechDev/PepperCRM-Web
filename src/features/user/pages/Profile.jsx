@@ -23,7 +23,8 @@ function Profile() {
           role: user.role || prev.role
         }));
       } catch (err) {
-        setError("No fue posible obtener el perfil: " + err.message);
+        setError("Could not fetch the profile: " );
+        console.error(err);
       }
     };
     fetchUser();
@@ -42,12 +43,13 @@ function Profile() {
       setProfile(updated);
       setEdit(false);
     } catch (err) {
-      setError("Couldn't update the profile: " + err.message);
+      setError("Couldn't update the profile: ");
+       console.error(err);
     }
   };
 
   if (error) return <div>{error}</div>;
-  if (!profile) return <div>Cargando...</div>;
+  if (!profile) return <div>Loading...</div>;
 
   return (
     <div className={styles.profileBoard}>

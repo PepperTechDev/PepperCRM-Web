@@ -21,7 +21,7 @@ const Login = () => {
         navigate("/leads"); // Redirige al módulo principal
       }
     } catch (err) {
-      setError("Credenciales inválidas: " + err.message);
+      setError("Invalid credentials: " + err.message);
     }
   };
 

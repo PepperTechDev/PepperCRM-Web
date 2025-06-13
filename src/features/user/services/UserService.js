@@ -21,7 +21,7 @@ export const updateUser = async (id, userData) => {
     return response.data;
   } catch (error) {
 
-    const msg = error.response?.data?.message || "Error desconocido";
+    const msg = error.response?.data?.message || "Unknown error";
     throw new Error(msg);
   }
 };

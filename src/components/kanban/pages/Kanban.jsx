@@ -12,13 +12,8 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import withReactContent from 'sweetalert2-react-content';
 
-import {
-  updateColumnTitle,
-  deleteColumn as deleteColumnApi,
-  reorderColumns,
-} from '../service/kanbanService';
-import { v4 as uuidv4 } from 'uuid';
-import axios from 'axios';
+
+import { v4 as uuidv4 } from "uuid";
 
 function Kanban() {
   const [columns, setColumns] = useState([]);
@@ -29,48 +24,48 @@ function Kanban() {
         const res = await fetchKanbanData();
         setColumns(res.data);
       } catch (err) {
-        console.error('Error loading Kanban data:', err);
+        console.error("Error loading Kanban data:", err);
       }
     };
     loadData();
   }, []);
 
   const handleEditColumnTitle = async (columnId, currentTitle) => {
-  const { value: newTitle } = await Swal.fire({
-    title: 'Edit Column Title',
-    input: 'text',
-    inputValue: currentTitle,
-    showCancelButton: true,
-    inputValidator: (value) => {
-      if (!value) {
-        return 'Title cannot be empty!';
-      }
-    },
-  });
+    const { value: newTitle } = await Swal.fire({
+      title: "Edit Column Title",
+      input: "text",
+      inputValue: currentTitle,
+      showCancelButton: true,
+      inputValidator: (value) => {
+        if (!value) {
+          return "Title cannot be empty!";
+        }
+      },
+    });
 
-  if (!newTitle || newTitle === currentTitle) return;
-  // Uncomment the following lines to enable the API call for updating the column title
+    if (!newTitle || newTitle === currentTitle) return;
+    // Uncomment the following lines to enable the API call for updating the column title
 
-   try {
+    try {
       // await updateColumnTitle(columnId, newTitle);
-     const updatedColumns = columns.map((col) =>
-       col.id === columnId ? { ...col, title: newTitle } : col
-     );
+      const updatedColumns = columns.map((col) =>
+        col.id === columnId ? { ...col, title: newTitle } : col
+      );
 
-     setColumns(updatedColumns);
+      setColumns(updatedColumns);
 
-     Swal.fire('Updated!', 'The column title was changed.', 'success');
-   } catch (err) {
-     console.error('Error updating column title:', err);
-    Swal.fire('Error', 'There was a problem updating the column.', 'error');
-   }
-};
+      Swal.fire("Updated!", "The column title was changed.", "success");
+    } catch (err) {
+      console.error("Error updating column title:", err);
+      Swal.fire("Error", "There was a problem updating the column.", "error");
+    }
+  };
 
   const handleDeleteColumn = async (columnId) => {
     const { isConfirmed } = await Swal.fire({
-      title: 'Are you sure?',
+      title: "Are you sure?",
 
-      icon: 'warning',
+      icon: "warning",
       showCancelButton: true,
     });
     if (isConfirmed) {
@@ -81,70 +76,78 @@ function Kanban() {
         const updatedColumns = columns.filter((col) => col.id !== columnId);
         setColumns(updatedColumns);
 
-        Swal.fire('Deleted!', 'The column has been deleted.', 'success');
+        Swal.fire("Deleted!", "The column has been deleted.", "success");
       } catch (err) {
-        console.error('Error deleting column:', err);
-        Swal.fire('Error', 'There was a problem deleting the column.', 'error');
+        console.error("Error deleting column:", err);
+        Swal.fire("Error", "There was a problem deleting the column.", "error");
       }
     }
-  }
+  };
 
+  const handleDragEnd = (event) => {
+    const { active, over } = event;
+    if (!over || active.id === over.id) return;
 
-const handleDragEnd = (event) => {
-  const { active, over } = event;
-  if (!over || active.id === over.id) return;
+    const activeColumnIndex = columns.findIndex((col) => col.id === active.id);
+    const overColumnIndex = columns.findIndex((col) => col.id === over.id);
 
-  const activeColumnIndex = columns.findIndex(col => col.id === active.id);
-  const overColumnIndex = columns.findIndex(col => col.id === over.id);
+    if (activeColumnIndex !== -1 && overColumnIndex !== -1) {
+      const newColumns = [...columns];
+      const [movedColumn] = newColumns.splice(activeColumnIndex, 1);
+      newColumns.splice(overColumnIndex, 0, movedColumn);
+      //place here the axios function to update the column order in the backend
 
-  if (activeColumnIndex !== -1 && overColumnIndex !== -1) {
+      setColumns(newColumns);
+      return;
+    }
+
+    const fromColumnIndex = columns.findIndex((col) =>
+      col.tasks.some((task) => task.id === active.id)
+    );
+    const toColumnIndex = columns.findIndex(
+      (col) =>
+        col.id === over.id || col.tasks.some((task) => task.id === over.id)
+    );
+
+    //if didn't find the columns, return nothing
+    if (fromColumnIndex === -1 || toColumnIndex === -1) return;
+
+    const fromColumn = columns[fromColumnIndex];
+    const toColumn = columns[toColumnIndex];
+
+    const task = fromColumn.tasks.find((task) => task.id === active.id);
+    if (!task || fromColumn.id === toColumn.id) return;
+
+    const updatedFromTasks = fromColumn.tasks.filter((t) => t.id !== active.id);
+    const updatedToTasks = [...toColumn.tasks, task];
+
     const newColumns = [...columns];
-    const [movedColumn] = newColumns.splice(activeColumnIndex, 1);
-    newColumns.splice(overColumnIndex, 0, movedColumn);
-    //place here the axios function to update the column order in the backend
-    
+    newColumns[fromColumnIndex] = { ...fromColumn, tasks: updatedFromTasks };
+    newColumns[toColumnIndex] = { ...toColumn, tasks: updatedToTasks };
+
     setColumns(newColumns);
-    return;
-  }
-
-
-  const fromColumnIndex = columns.findIndex(col =>
-    col.tasks.some(task => task.id === active.id)
-  );
-  const toColumnIndex = columns.findIndex(col =>
-    col.id === over.id || col.tasks.some(task => task.id === over.id)
-  );
-
-  //if didn't find the columns, return nothing
-  if (fromColumnIndex === -1 || toColumnIndex === -1) return;
-
-  const fromColumn = columns[fromColumnIndex];
-  const toColumn = columns[toColumnIndex];
-
-  const task = fromColumn.tasks.find(task => task.id === active.id);
-  if (!task || (fromColumn.id === toColumn.id)) return;
-
-  const updatedFromTasks = fromColumn.tasks.filter(t => t.id !== active.id);
-  const updatedToTasks = [...toColumn.tasks, task];
-
-  const newColumns = [...columns];
-  newColumns[fromColumnIndex] = { ...fromColumn, tasks: updatedFromTasks };
-  newColumns[toColumnIndex] = { ...toColumn, tasks: updatedToTasks };
-
-  setColumns(newColumns);
-};
+  };
 
   const handleAddTask = (columnId, newTask) => {
-    setColumns(cols =>
-      cols.map(col =>
+    setColumns((cols) =>
+      cols.map((col) =>
         col.id === columnId
-          ? { ...col, tasks: [...col.tasks, newTask] }
+          ? {
+              ...col,
+              tasks: [
+                ...col.tasks,
+                {
+                  ...newTask,
+                  checklist: [], // Initialize checklist for new tasks
+                },
+              ],
+            }
           : col
       )
     );
 
     // Actualiza también el initialData en memoria
-    const colIndex = initialData.findIndex(col => col.id === columnId);
+    const colIndex = initialData.findIndex((col) => col.id === columnId);
     if (colIndex !== -1) {
       initialData[colIndex].tasks.push(newTask);
     }
@@ -154,24 +157,55 @@ const handleDragEnd = (event) => {
     const { value: formValues } = await Swal.fire({
       title: "Edit Card",
       html: `
-        <input type="text" id="taskContent" class="swal2-input" value="${task.content}" />
-        <input type="datetime-local" id="taskDueDate" class="swal2-input" value="${
-          task.dueDate ? new Date(task.dueDate).toISOString().slice(0, 16) : ""
-        }" />
-      `,
+            <div class="${styles.formGroup}">
+              <label for="cardTitle" class="${styles.formLabel}">Title:</label>
+              <input
+                type="text"
+                id="cardTitle"
+                class="${styles.input}"
+                placeholder="Write the title of the card"
+              />
+            </div>
+            <div class="${styles.formGroup}">
+              <label for="cardDescription" class="${styles.formLabel}">Descripción:</label>
+              <textarea
+                id="cardDescription"
+                class="${styles.input} ${styles.textarea}"
+                placeholder="Add a detailed description"
+              ></textarea>
+            </div>
+            <div class="${styles.formGroup}">
+              <label for="cardDueDate" class="${styles.formLabel}">Deadline:</label>
+              <input
+                type="datetime-local"
+                id="cardDueDate"
+                class="${styles.input}"
+              />
+            </div>
+          `,
       focusConfirm: false,
       preConfirm: () => {
-        const content = document.getElementById("taskContent").value;
-        const dueDate = document.getElementById("taskDueDate").value;
-        if (!content) {
-          Swal.showValidationMessage("Task content cannot be empty");
+        const titleEl = document.getElementById("cardTitle");
+        const descEl = document.getElementById("cardDescription");
+        const dueEl = document.getElementById("cardDueDate");
+
+        const title = titleEl.value.trim();
+        const description = descEl.value.trim();
+        const dueRaw = dueEl.value;
+
+        if (!description) {
+          Swal.showValidationMessage("Description cannot be empty");
           return null;
         }
-        return { content, dueDate: dueDate ? new Date(dueDate).toISOString() : null };
+        return {
+          title,
+          description,
+          dueDate: dueRaw ? new Date(dueRaw).toISOString() : null,
+        };
       },
       showCancelButton: true,
     });
-  
+
     if (formValues) {
       setColumns((cols) =>
         cols.map((col) =>
@@ -180,7 +214,12 @@ const handleDragEnd = (event) => {
                 ...col,
                 tasks: col.tasks.map((t) =>
                   t.id === task.id
-                    ? { ...t, content: formValues.content, dueDate: formValues.dueDate }
+                    ? {
+                        ...t,
+                        title: formValues.title,
+                        content: formValues.description,
+                        dueDate: formValues.dueDate,
+                      }
                     : t
                 ),
               }
@@ -200,10 +239,10 @@ const handleDragEnd = (event) => {
       cancelButtonText: "Cancel",
     });
     if (isConfirmed) {
-      setColumns(cols =>
-        cols.map(col =>
+      setColumns((cols) =>
+        cols.map((col) =>
           col.id === columnId
-            ? { ...col, tasks: col.tasks.filter(t => t.id !== task.id) }
+            ? { ...col, tasks: col.tasks.filter((t) => t.id !== task.id) }
             : col
         )
       );
@@ -214,48 +253,115 @@ const handleDragEnd = (event) => {
     const id = uuidv4();
     const newTask = {
       ...task,
-      id: `task-${id}`, 
+      id: `task-${id}`,
       content: `${task.content} (Copy)`, // Modifica el contenido para indicar que es una copia
     };
     // add axios call to copy the task in the backend
-    
-    setColumns(cols =>
-      cols.map(col =>
+
+    setColumns((cols) =>
+      cols.map((col) =>
+        col.id === columnId ? { ...col, tasks: [...col.tasks, newTask] } : col
+      )
+    );
+  };
+
+  // New Checklist Handlers
+  const handleAddChecklistItem = (columnId, taskId, itemText) => {
+    setColumns((prevColumns) =>
+      prevColumns.map((col) =>
         col.id === columnId
-          ? { ...col, tasks: [...col.tasks, newTask] }
+          ? {
+              ...col,
+              tasks: col.tasks.map((task) =>
+                task.id === taskId
+                  ? {
+                      ...task,
+                      checklist: [
+                        ...(task.checklist || []), // Ensure checklist exists
+                        { id: uuidv4(), text: itemText, completed: false },
+                      ],
+                    }
+                  : task
+              ),
+            }
           : col
       )
     );
-  }
+  };
 
-  const handleSetDueDate = async (columnId, task) => {
-    const { value: dueDate } = await Swal.fire({
-      title: "Set Due Date",
-      html: `
-        <input type="datetime-local" id="dueDate" class="swal2-input" />
-      `,
-      focusConfirm: false,
-      preConfirm: () => {
-        const input = document.getElementById("dueDate");
-        return input.value ? new Date(input.value) : null;
-      },
-      showCancelButton: true,
-    });
-  
-    if (dueDate) {
-      setColumns(cols =>
-        cols.map(col =>
-          col.id === columnId
-            ? {
-                ...col,
-                tasks: col.tasks.map(t =>
-                  t.id === task.id ? { ...t, dueDate } : t
-                ),
-              }
-            : col
-        )
-      );
-    }
+  const handleToggleChecklistItem = (columnId, taskId, checklistItemId) => {
+    setColumns((prevColumns) =>
+      prevColumns.map((col) =>
+        col.id === columnId
+          ? {
+              ...col,
+              tasks: col.tasks.map((task) =>
+                task.id === taskId
+                  ? {
+                      ...task,
+                      checklist: task.checklist.map((item) =>
+                        item.id === checklistItemId
+                          ? { ...item, completed: !item.completed }
+                          : item
+                      ),
+                    }
+                  : task
+              ),
+            }
+          : col
+      )
+    );
+  };
+
+  const handleEditChecklistItem = (
+    columnId,
+    taskId,
+    checklistItemId,
+    newText
+  ) => {
+    setColumns((prevColumns) =>
+      prevColumns.map((col) =>
+        col.id === columnId
+          ? {
+              ...col,
+              tasks: col.tasks.map((task) =>
+                task.id === taskId
+                  ? {
+                      ...task,
+                      checklist: task.checklist.map((item) =>
+                        item.id === checklistItemId
+                          ? { ...item, text: newText }
+                          : item
+                      ),
+                    }
+                  : task
+              ),
+            }
+          : col
+      )
+    );
+  };
+
+  const handleDeleteChecklistItem = (columnId, taskId, checklistItemId) => {
+    setColumns((prevColumns) =>
+      prevColumns.map((col) =>
+        col.id === columnId
+          ? {
+              ...col,
+              tasks: col.tasks.map((task) =>
+                task.id === taskId
+                  ? {
+                      ...task,
+                      checklist: task.checklist.filter(
+                        (item) => item.id !== checklistItemId
+                      ),
+                    }
+                  : task
+              ),
+            }
+          : col
+      )
+    );
   };
 
 const handleViewComments = (task) => {
@@ -286,23 +392,27 @@ const handleViewComments = (task) => {
 
   return (
     <section className={styles.containerKanban}>
-        <Sidebar />
-        <div className={styles.flexKanban}>
-        <Navbar/>
+      <Sidebar />
+      <div className={styles.flexKanban}>
+        <Navbar />
         <DndContext onDragEnd={handleDragEnd}>
-            <Board
-              columns={columns}
-              setColumns={setColumns}
-              onEditTitle={handleEditColumnTitle}
-              onDeleteColumn={handleDeleteColumn}
-              onAddTask={handleAddTask}
-              onEditTask={handleEditTask}
-              onDeleteTask={handleDeleteTask}
-              onCopyTask={handleCopyTask}
+          <Board
+            columns={columns}
+            setColumns={setColumns}
+            onEditTitle={handleEditColumnTitle}
+            onDeleteColumn={handleDeleteColumn}
+            onAddTask={handleAddTask}
+            onEditTask={handleEditTask}
+            onDeleteTask={handleDeleteTask}
+            onCopyTask={handleCopyTask}
+            onAddChecklistItem={handleAddChecklistItem}
+            onToggleChecklistItem={handleToggleChecklistItem}
+            onEditChecklistItem={handleEditChecklistItem}
+            onDeleteChecklistItem={handleDeleteChecklistItem}
               onViewComments={handleViewComments}
-            />
+          />
         </DndContext>
-        </div>
+      </div>
     </section>
   );
 }

@@ -1,73 +1,196 @@
-.task {
-  background-color: var(--color-primary);
-  border: 1px solid var(--color-primary);
-  padding: 12px;
-  border-radius: 6px;
-  margin-bottom: 10px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  cursor: grab;
-  transition: background-color 0.2s ease;
-}
-
-.task:active {
-  cursor: grabbing;
-  background-color: #e2e6ea;
-}
-
-.taskActions {
-  display: flex;
-  gap: 16px;
-  margin-left: auto;
-}
-.iconBtn {
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  color: var(--third-color);
-  margin-top: 12px;
-}
+/* Task.module.css (add these or modify existing) */
 
 .task {
-  background-color: var(--color-primary);
-  border: 1px solid var(--color-primary);
-  padding: 12px;
-  border-radius: 6px;
+  background-color: white;
+  border-radius: 8px;
+  padding: 15px;
   margin-bottom: 10px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  cursor: grab;
-  transition: background-color 0.2s ease;
-}
-
-.task:active {
-  cursor: grabbing;
-  background-color: #e2e6ea;
-}
-
-.taskActions {
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   display: flex;
-  gap: 16px;
-  margin-left: auto;
+  flex-direction: column;
+  gap: 12px; /* Space between elements */
+  position: relative; /* For action buttons positioning */
 }
 
-.iconBtn {
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  color: var(--third-color);
-  margin-top: 12px;
+.taskTitle {
+  font-weight: bold;
+  color: #333;
+}
+
+.taskDescription {
+  font-size: 0.9em;
+  color: #555;
+  margin-bottom: 10px;
 }
 
 .dueDate {
-  margin-top: 8px;
-  font-size: 12px;
-  color: var(--color-white);
+  font-size: 0.8em;
+  color: #777;
+  border-top: 1px solid #eee;
+  padding-top: 8px;
+}
+
+.taskActions {
+  display: flex;
+  justify-content: flex-end; /* Align actions to the right */
+  gap: 5px;
+  margin-top: 10px; /* Space from description/dueDate */
+}
+
+.iconBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--third-color);
+  transition: color 0.2s ease;
+}
+
+.iconBtn:hover {
+  color: #333;
+}
+
+/* Checklist Styles */
+.checklistContainer {
+  margin-top: 15px;
+  padding-top: 10px;
+  border-top: 1px solid #eee;
+}
+
+.checklistTitle {
+  font-size: 1em;
   font-weight: bold;
+  margin-bottom: 10px;
+  color: #444;
+}
+
+.checklistItem {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  gap: 8px; /* Space between checkbox, text, and delete button */
+}
+
+.checklistToggleBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  color: #555;
+}
+
+.checklistItemText {
+  flex-grow: 1; /* Allows text to take available space */
+  font-size: 0.9em;
+  color: #333;
+  cursor: pointer; /* Indicates it's clickable for editing */
+}
+
+.checklistItemText.completed {
+  text-decoration: line-through;
+  color: #999;
+}
+
+.checklistDeleteBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  color: #999;
+  transition: color 0.2s ease;
+}
+
+.checklistDeleteBtn:hover {
+  color: #e74c3c; /* Red color on hover */
+}
+
+.addChecklistBtn {
+  background-color: #f0f0f0;
+  border: 1px dashed #ccc;
+  border-radius: 5px;
+  color: #555;
+  padding: 8px 12px;
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.addChecklistBtn:hover {
+  background-color: #e0e0e0;
+  border-color: #999;
+}
+
+/* Styles for Swal inputs within Kanban.jsx and Column.jsx */
+.formGroup {
+    margin-bottom: 15px;
+    text-align: left; /* Align labels and inputs to the left */
+}
+
+.formLabel {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+.input,
+.textarea {
+    width: calc(100% - 20px); /* Adjust for padding */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.textarea {
+    resize: vertical; /* Allow vertical resizing */
+    min-height: 80px;
+}
+
+.input::placeholder,
+.textarea::placeholder {
+    color: #aaa;
+}
+
+/* SweetAlert2 custom classes (from Kanban.jsx and Column.jsx) */
+.addForm {
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.btnConfirm {
+  background-color: #28a745 !important; /* Green */
+  color: white !important;
+  border: none !important;
+  padding: 10px 20px !important;
+  border-radius: 5px !important;
+  cursor: pointer !important;
+  font-size: 1em !important;
+  margin: 0 5px !important;
+}
+
+.btnCancel {
+  background-color: #dc3545 !important; /* Red */
+  color: white !important;
+  border: none !important;
+  padding: 10px 20px !important;
+  border-radius: 5px !important;
+  cursor: pointer !important;
+  font-size: 1em !important;
+  margin: 0 5px !important;
 }
 
 .comments {

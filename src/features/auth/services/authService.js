@@ -5,11 +5,11 @@ import api from "../../../services/ApiClient";
 export const login = async (credentials) => {
   try {
     const response = await api.post("/auth/login", credentials);
-    console.log(credentials.email.toLowerCase());
-    console.log(credentials.password.toLowerCase());
+    console.log(credentials.email);
+    console.log(credentials.password);
     const data = response.data;
     if (!data.token) {
-      throw new Error("No se recibió un token de autenticación.");
+      throw new Error("No authentication token was received.");
     }
 
     // Guarda el token en localStorage
@@ -17,7 +17,7 @@ export const login = async (credentials) => {
     setUserID(data.token);
     return data;
   } catch (error) {
-    throw error.response?.data || { error: "Error al iniciar sesión" };
+    throw error.response?.data || { error: "Error logging in." };
   }
 };
 
@@ -28,7 +28,7 @@ export const register = async (credentials) => {
     const data = response.data;
     return data;
   } catch (error) {
-    throw error.response?.data || { error: "Error al registrarse" };
+    throw error.response?.data || { error: "Error when registering." };
   }
 };
 
@@ -37,7 +37,7 @@ export const register = async (credentials) => {
 export const verifyToken = async () => {
   const token = getToken();
   if (!token) {
-    throw new Error("No hay token disponible.");
+    throw new Error("No token is available.");
   }
 
   try {
@@ -48,7 +48,7 @@ export const verifyToken = async () => {
     });
     return response.data;
   } catch (error) {
-    throw error.response?.data || { error: "Error al verificar el token" };
+    throw error.response?.data || { error: "Error verifying token." };
   }
 };
 

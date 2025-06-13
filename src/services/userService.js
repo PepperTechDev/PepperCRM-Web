@@ -6,8 +6,8 @@ export const getUserProfile = async () => {
   //return response.data;
   return {
     id: 1,
-    name: "Usuario de Prueba",
-    email: "usuario.prueba@example.com",
+    name: "Test User",
+    email: "test.user@example.com",
     role: "admin",
   };
 };
