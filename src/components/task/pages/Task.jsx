@@ -1,6 +1,6 @@
 // Task.jsx
 import { useDraggable } from "@dnd-kit/core";
-import { Pencil, Trash2, Copy, PlusCircle, CheckSquare, Square, XCircle } from "lucide-react";
+import { Pencil, Trash2, Copy, PlusCircle, CheckSquare, Square, XCircle, MessageCircle} from "lucide-react";
 import styles from "./../styles/Task.module.css";
 import Swal from "sweetalert2"; // Import Swal for adding checklist items
 
@@ -13,6 +13,7 @@ function Task({
   onToggleChecklistItem,
   onEditChecklistItem,
   onDeleteChecklistItem,
+  onViewComments
 }) {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: task.id,
@@ -147,6 +148,19 @@ function Task({
         >
           <Copy size={16} />
         </button>
+      
+        <button
+          className={styles.iconBtn}
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            // Handle comments logic here
+            onViewComments(task);
+          }}
+          >
+          <MessageCircle size={16} />
+        </button>
+        
       </div>
     </div>
   );

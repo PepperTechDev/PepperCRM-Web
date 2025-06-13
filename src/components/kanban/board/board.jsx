@@ -17,6 +17,7 @@ function Board({
   onEditTask,
   onDeleteTask,
   onCopyTask,
+  onViewComments,
   onAddChecklistItem,
   onToggleChecklistItem,
   onEditChecklistItem,
@@ -72,10 +73,10 @@ function Board({
               onToggleChecklistItem={onToggleChecklistItem}
               onEditChecklistItem={onEditChecklistItem}
               onDeleteChecklistItem={onDeleteChecklistItem}
+              onViewComments={onViewComments}
             />
           ))}
         </SortableContext>
-
         <button className={styles.addButton} onClick={handleAddColumn}>
           <Plus size={16} /> Add Column
         </button>

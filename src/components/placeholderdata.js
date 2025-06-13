@@ -11,14 +11,22 @@ export const initialData = [
     id: '3',
     title: 'In Progress',
     tasks: [
-      { id: 'task-3', content: 'Build API', dueDate: null },
+      { id: 'task-3', content: 'Build API', dueDate: null, comments:[
+        {author: 'Sebas', comment: 'This is a comment.'},
+      ]},
     ],
   },
   {
     id: '2',
     title: 'Done',
     tasks: [
-      { id: 'task-4', content: 'Set up project', dueDate: null },
+      {
+        id: 'task-4', content: 'Set up project', dueDate: null, comments: [
+          { author: 'Jorge', comment: 'Pending revision.' },
+          { author: 'Sebas', comment: 'hello' }
+        ]
+      },
     ],
+
   },
 ];
