@@ -1,6 +1,6 @@
 // Task.jsx
 import { useDraggable } from "@dnd-kit/core";
-import { Pencil, Trash2, Copy, PlusCircle, CheckSquare, Square, XCircle, MessageCircle} from "lucide-react";
+import { Pencil, Trash2, Copy, PlusCircle, CheckSquare, Square, XCircle, MessageCircle, CircleUserRound } from "lucide-react";
 import styles from "./../styles/Task.module.css";
 import Swal from "sweetalert2"; // Import Swal for adding checklist items
 
@@ -13,7 +13,8 @@ function Task({
   onToggleChecklistItem,
   onEditChecklistItem,
   onDeleteChecklistItem,
-  onViewComments
+  onViewComments,
+  onChangeAssignedTo,
 }) {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: task.id,
@@ -62,19 +63,19 @@ function Task({
 
   return (
     <div ref={setNodeRef} className={styles.task} style={{ cursor: "grab", ...style }}>
-        <div
-      {...listeners}
-       {...attributes}
-      style={{ flex: 1, cursor: "grab" }}
-     >
-       {task.title && (
-         <div className={styles.taskTitle}>{task.title}</div>
-       )}
+      <div
+        {...listeners}
+        {...attributes}
+        style={{ flex: 1, cursor: "grab" }}
+      >
+        {task.title && (
+          <div className={styles.taskTitle}>{task.title}</div>
+        )}
 
-       {task.content && (
-        <div className={styles.taskDescription}>{task.content}</div>
-      )}
-    </div>
+        {task.content && (
+          <div className={styles.taskDescription}>{task.content}</div>
+        )}
+      </div>
       {task.dueDate && (
         <div className={styles.dueDate}>
           <span>Due: {new Date(task.dueDate).toLocaleString()}</span>
@@ -116,51 +117,68 @@ function Task({
       >
         <PlusCircle size={16} /> Add Checklist Item
       </button>
-
-      <div className={styles.taskActions}>
-        <button
-          className={styles.iconBtn}
-          type="button"
-          onClick={(e) => {
-            e.stopPropagation();
-            onEditTask(task);
-          }}
-        >
-          <Pencil size={16} />
-        </button>
-        <button
-          className={styles.iconBtn}
-          type="button"
-          onClick={(e) => {
-            e.stopPropagation();
-            onDeleteTask(task);
-          }}
-        >
-          <Trash2 size={16} />
-        </button>
+      <div className={styles.taskEnd}>
+        <div className={styles.taskActions}>
           <button
-          className={styles.iconBtn}
-          type="button"
-          onClick={(e) => {
-            e.stopPropagation();
-            onCopyTask(task);
-          }}
-        >
-          <Copy size={16} />
-        </button>
-      
-        <button
-          className={styles.iconBtn}
-          type="button"
-          onClick={(e) => {
-            e.stopPropagation();
-            // Handle comments logic here
-            onViewComments(task);
-          }}
+            className={styles.iconBtn}
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              onEditTask(task);
+            }}
           >
-          <MessageCircle size={16} />
-        </button>
-        
+            <Pencil size={16} />
+          </button>
+          <button
+            className={styles.iconBtn}
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              onDeleteTask(task);
+            }}
+          >
+            <Trash2 size={16} />
+          </button>
+          <button
+            className={styles.iconBtn}
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              onCopyTask(task);
+            }}
+          >
+            <Copy size={16} />
+          </button>
+
+          <button
+            className={styles.iconBtn}
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              // Handle comments logic here
+              onViewComments(task);
+            }}
+          >
+            <MessageCircle size={16} />
+          </button>
+        </div >
+        <div className={styles.assignedTo}>
+          <div >
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                onChangeAssignedTo(task);
+              }} 
+            className={styles.iconBtn}>
+              <CircleUserRound size={30} />
+            </button>
+          </div>
+          {task.assignedTo  ? (
+            <span>{task.assignedTo.name}</span>
+          ) : (
+            <span className={styles.unassigned}>Unassigned</span>
+          )}
+        </div>
       </div>
     </div>
   );

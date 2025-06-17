@@ -16,7 +16,8 @@ function Column({
   onToggleChecklistItem,
   onEditChecklistItem,
   onDeleteChecklistItem,
-  onViewComments
+  onViewComments,
+  onChangeAssignedTo, 
 }) {
   const {
     setNodeRef: setDraggableRef,
@@ -160,6 +161,8 @@ function Column({
             onEditChecklistItem={(checklistItemId, newText) => onEditChecklistItem(column.id, task.id, checklistItemId, newText)}
             onDeleteChecklistItem={(checklistItemId) => onDeleteChecklistItem(column.id, task.id, checklistItemId)}
             onViewComments={() => onViewComments(task)}
+            onChangeAssignedTo={(t) => onChangeAssignedTo(t , column.id)}
+            
           />
         ))}
       </div>
