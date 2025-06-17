@@ -22,6 +22,7 @@ function Board({
   onToggleChecklistItem,
   onEditChecklistItem,
   onDeleteChecklistItem,
+  onChangeAssignedTo, 
 }) {
   const { setNodeRef } = useDroppable({
     id: "board", // Necesario para que actúe como área de drop
@@ -74,6 +75,7 @@ function Board({
               onEditChecklistItem={onEditChecklistItem}
               onDeleteChecklistItem={onDeleteChecklistItem}
               onViewComments={onViewComments}
+              onChangeAssignedTo={onChangeAssignedTo}
             />
           ))}
         </SortableContext>

@@ -11,18 +11,20 @@ import ReactDOMServer from 'react-dom/server';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import withReactContent from 'sweetalert2-react-content';
-
-
 import { v4 as uuidv4 } from "uuid";
+
 
 function Kanban() {
   const [columns, setColumns] = useState([]);
-
+  const [users, setUsers] = useState([]);
+  const mySwalReact = withReactContent(Swal);
   useEffect(() => {
     const loadData = async () => {
       try {
         const res = await fetchKanbanData();
-        setColumns(res.data);
+        setColumns(res.data.columns);
+        setUsers(res.data.users);
+      
       } catch (err) {
         console.error("Error loading Kanban data:", err);
       }
@@ -365,7 +367,7 @@ function Kanban() {
   };
 
 const handleViewComments = (task) => {
-  const MySwal = withReactContent(Swal);
+
   const html = ReactDOMServer.renderToString(
     <div style={{ textAlign: 'left' }}>
       {task.comments && task.comments.length > 0 ? (
@@ -382,12 +384,43 @@ const handleViewComments = (task) => {
     </div>
   );
 
-  MySwal.fire({
+  mySwalReact.fire({
     title: `Comments of "${task.content}"`,
     html: html,
     confirmButtonText: 'Close',
     width: 600
   });
+};
+
+const handleAssignUser = async (task, columnId) => {
+  const { value: selectedUserId } = await mySwalReact.fire({
+    title: `Assign user to ${task.content}`,
+    input: 'select',
+    inputOptions: users.reduce((acc, user) => {
+      acc[user.id] = user.name;
+      return acc;
+    }, {}),
+    inputPlaceholder: 'Select a user',
+    showCancelButton: true,
+  });
+
+  if (selectedUserId) {
+    const selectedUser = users.find(u => u.id === selectedUserId);
+    setColumns((cols) =>
+      cols.map((col) =>
+        col.id === columnId
+          ? {
+              ...col,
+              tasks: col.tasks.map((t) =>
+                t.id === task.id ? { ...t, assignedTo: selectedUser } : t
+              ),
+            }
+          : col
+      )
+    );
+
+    Swal.fire('Assigned!', `${selectedUser.name} was assigned to the task.`, 'success');
+  }
 };
 
   return (
@@ -410,6 +443,7 @@ const handleViewComments = (task) => {
             onEditChecklistItem={handleEditChecklistItem}
             onDeleteChecklistItem={handleDeleteChecklistItem}
             onViewComments={handleViewComments}
+            onChangeAssignedTo={handleAssignUser}
           />
         </DndContext>
       </div>
