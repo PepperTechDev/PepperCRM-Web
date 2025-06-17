@@ -24,7 +24,7 @@
     "react-datepicker": "^8.4.0",
     "react-dom": "^19.1.0",
     "react-hook-form": "^7.46.1",
-    "react-router-dom": "^7.4.1",
+    "react-router-dom": "^7.6.2",
     "sweetalert2": "^11.21.2",
     "sweetalert2-react-content": "^5.1.0",
     "uuid": "^11.1.0"
