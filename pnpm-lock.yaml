@@ -48,8 +48,8 @@ importers:
         specifier: ^19.1.0
         version: 19.1.0(react@19.1.0)
       react-hook-form:
-        specifier: ^7.46.1
-        version: 7.55.0(react@19.1.0)
+        specifier: ^7.58.0
+        version: 7.58.0(react@19.1.0)
       react-router-dom:
         specifier: ^7.6.2
         version: 7.6.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -982,8 +982,8 @@ packages:
     peerDependencies:
       react: ^19.1.0
 
-  react-hook-form@7.55.0:
-    resolution: {integrity: sha512-XRnjsH3GVMQz1moZTW53MxfoWN7aDpUg/GpVNc4A3eXRVNdGXfbzJ4vM4aLQ8g6XCUh1nIbx70aaNCl7kxnjog==}
+  react-hook-form@7.58.0:
+    resolution: {integrity: sha512-zGijmEed35oNfOfy7ub99jfjkiLhHwA3dl5AgyKdWC6QQzhnc7tkWewSa+T+A2EpLrc6wo5DUoZctS9kufWJjA==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       react: ^16.8.0 || ^17 || ^18 || ^19
@@ -1861,7 +1861,7 @@ snapshots:
       react: 19.1.0
       react-datepicker: 8.4.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       react-dom: 19.1.0(react@19.1.0)
-      react-hook-form: 7.55.0(react@19.1.0)
+      react-hook-form: 7.58.0(react@19.1.0)
       react-router-dom: 7.6.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       sweetalert2: 11.21.2
       sweetalert2-react-content: 5.1.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sweetalert2@11.21.2)
@@ -1906,7 +1906,7 @@ snapshots:
       react: 19.1.0
       scheduler: 0.26.0
 
-  react-hook-form@7.55.0(react@19.1.0):
+  react-hook-form@7.58.0(react@19.1.0):
     dependencies:
       react: 19.1.0
 
