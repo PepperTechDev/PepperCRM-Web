@@ -9,6 +9,6 @@ updates:
   - package-ecosystem: "npm"
     directory: "/"  # El archivo package.json está en la raíz del repositorio
     schedule:
-      interval: "weekly"  # Modos "daily", "monthly", etc.
+      interval: "daily"  # Modos "daily", "monthly", etc.
     commit-message:
       prefix: "deps"  # Prefijo de mensaje para las actualizaciones de dependencias
