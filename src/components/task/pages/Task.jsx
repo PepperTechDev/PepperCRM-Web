@@ -1,6 +1,16 @@
 // Task.jsx
 import { useDraggable } from "@dnd-kit/core";
-import { Pencil, Trash2, Copy, PlusCircle, CheckSquare, Square, XCircle, MessageCircle, CircleUserRound } from "lucide-react";
+import {
+  Pencil,
+  Trash2,
+  Copy,
+  PlusCircle,
+  CheckSquare,
+  Square,
+  XCircle,
+  MessageCircle,
+  CircleUserRound,
+} from "lucide-react";
 import styles from "./../styles/Task.module.css";
 import Swal from "sweetalert2"; // Import Swal for adding checklist items
 
@@ -20,9 +30,8 @@ function Task({
     id: task.id,
   });
   const style = {
-    transform: transform ? `translate(${transform.x}px, ${transform.y}px)` : '',
+    transform: transform ? `translate(${transform.x}px, ${transform.y}px)` : "",
   };
-
 
   const handleAddChecklistClick = async () => {
     const { value: itemText } = await Swal.fire({
@@ -60,17 +69,14 @@ function Task({
     }
   };
 
-
   return (
-    <div ref={setNodeRef} className={styles.task} style={{ cursor: "grab", ...style }}>
-      <div
-        {...listeners}
-        {...attributes}
-        style={{ flex: 1, cursor: "grab" }}
-      >
-        {task.title && (
-          <div className={styles.taskTitle}>{task.title}</div>
-        )}
+    <div
+      ref={setNodeRef}
+      className={styles.task}
+      style={{ cursor: "grab", ...style }}
+    >
+      <div {...listeners} {...attributes} style={{ flex: 1, cursor: "grab" }}>
+        {task.title && <div className={styles.taskTitle}>{task.title}</div>}
 
         {task.content && (
           <div className={styles.taskDescription}>{task.content}</div>
@@ -92,10 +98,16 @@ function Task({
                 className={styles.checklistToggleBtn}
                 onClick={() => onToggleChecklistItem(item.id)}
               >
-                {item.completed ? <CheckSquare size={18} /> : <Square size={18} />}
+                {item.completed ? (
+                  <CheckSquare size={18} />
+                ) : (
+                  <Square size={18} />
+                )}
               </button>
               <span
-                className={`${styles.checklistItemText} ${item.completed ? styles.completed : ''}`}
+                className={`${styles.checklistItemText} ${
+                  item.completed ? styles.completed : ""
+                }`}
                 onClick={() => handleEditChecklistItemClick(item)} // Allow editing by clicking text
               >
                 {item.text}
@@ -155,29 +167,32 @@ function Task({
             type="button"
             onClick={(e) => {
               e.stopPropagation();
-              // Handle comments logic here
               onViewComments(task);
             }}
           >
             <MessageCircle size={16} />
+            {task.comments && task.comments.length > 0 && (
+              <span className={styles.commentCount}>{task.comments.length}</span>
+            )}
           </button>
-        </div >
-        <div className={styles.assignedTo}>
-          <div >
+
+          <div className={styles.assignedTo}>
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 onChangeAssignedTo(task);
-              }} 
-            className={styles.iconBtn}>
-              <CircleUserRound size={30} />
+              }}
+              className={styles.iconBtn}
+            >
+              <CircleUserRound size={20} />
             </button>
+
+            {task.assignedTo ? (
+              <span>{task.assignedTo.name}</span>
+            ) : (
+              <span className={styles.unassigned}>Unassigned</span>
+            )}
           </div>
-          {task.assignedTo  ? (
-            <span>{task.assignedTo.name}</span>
-          ) : (
-            <span className={styles.unassigned}>Unassigned</span>
-          )}
         </div>
       </div>
     </div>

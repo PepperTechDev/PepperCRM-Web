@@ -1,18 +1,16 @@
-import { useEffect, useState } from 'react';
-import { DndContext } from '@dnd-kit/core';
-import Board from '../board/board';
-import { fetchKanbanData } from '../../task/services/ApiKanban';
-import Navbar from '../../navbar/pages/Navbar';
-import Sidebar from '../../sidebar/pages/Sidebar';
-import styles from '../styles/Kanban.module.css';
-import Swal from 'sweetalert2';
-import { initialData } from '../../placeholderdata';
-import ReactDOMServer from 'react-dom/server';
-import DatePicker from "react-datepicker";
+import { useEffect, useState } from "react";
+import { DndContext } from "@dnd-kit/core";
+import Board from "../board/board";
+import { fetchKanbanData } from "../../task/services/ApiKanban";
+import Navbar from "../../navbar/pages/Navbar";
+import Sidebar from "../../sidebar/pages/Sidebar";
+import styles from "../styles/Kanban.module.css";
+import Swal from "sweetalert2";
+import { initialData } from "../../placeholderdata";
 import "react-datepicker/dist/react-datepicker.css";
-import withReactContent from 'sweetalert2-react-content';
+import withReactContent from "sweetalert2-react-content";
 import { v4 as uuidv4 } from "uuid";
-
+import { getBoartAll } from "../service/kanbanService";
 
 function Kanban() {
   const [columns, setColumns] = useState([]);
@@ -24,12 +22,20 @@ function Kanban() {
         const res = await fetchKanbanData();
         setColumns(res.data.columns);
         setUsers(res.data.users);
-      
       } catch (err) {
         console.error("Error loading Kanban data:", err);
       }
     };
     loadData();
+    getBoartAll()
+      .then(({ columns }) => {
+
+        console.log("Tableros cargados:", columns);
+
+        // Si además viene un array de usuarios:
+        // setUsers(data.users);
+      })
+      .catch((err) => console.error("No pude cargar tableros:", err));
   }, []);
 
   const handleEditColumnTitle = async (columnId, currentTitle) => {
@@ -221,6 +227,7 @@ function Kanban() {
                         title: formValues.title,
                         content: formValues.description,
                         dueDate: formValues.dueDate,
+                        comments: t.comments || [], // <-- Mantén los comentarios existentes
                       }
                     : t
                 ),
@@ -366,62 +373,126 @@ function Kanban() {
     );
   };
 
-const handleViewComments = (task) => {
+  const handleViewComments = async (task, columnId) => {
+    // Asegura que siempre haya un array de comentarios
+    const comments = task.comments || [];
 
-  const html = ReactDOMServer.renderToString(
-    <div style={{ textAlign: 'left' }}>
-      {task.comments && task.comments.length > 0 ? (
-        <ul>
-          {task.comments.map((comment, idx) => (
-            <li key={idx}>
-              <strong>{comment.author}:</strong> {comment.comment}
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>No comments for this task.</p>
-      )}
-    </div>
-  );
+    // Renderiza los comentarios existentes en HTML
+    const commentsHtml = comments.length
+      ? `<ul style="text-align:left;padding-left:1em;">
+          ${comments
+            .map(
+              (c) =>
+                `<li><b>${c.author}:</b> ${c.comment}</li>`
+            )
+            .join("")}
+        </ul>`
+      : `<div style="color:#888;">No comments yet.</div>`;
 
-  mySwalReact.fire({
-    title: `Comments of "${task.content}"`,
-    html: html,
-    confirmButtonText: 'Close',
-    width: 600
-  });
-};
-
-const handleAssignUser = async (task, columnId) => {
-  const { value: selectedUserId } = await mySwalReact.fire({
-    title: `Assign user to ${task.content}`,
-    input: 'select',
-    inputOptions: users.reduce((acc, user) => {
-      acc[user.id] = user.name;
-      return acc;
-    }, {}),
-    inputPlaceholder: 'Select a user',
-    showCancelButton: true,
-  });
-
-  if (selectedUserId) {
-    const selectedUser = users.find(u => u.id === selectedUserId);
-    setColumns((cols) =>
-      cols.map((col) =>
-        col.id === columnId
-          ? {
-              ...col,
-              tasks: col.tasks.map((t) =>
-                t.id === task.id ? { ...t, assignedTo: selectedUser } : t
-              ),
-            }
-          : col
+    // Renderiza el select de usuarios
+    const userOptions = users
+      .map(
+        (u) =>
+          `<option value="${u.id}">${u.name}</option>`
       )
-    );
+      .join("");
 
-    Swal.fire('Assigned!', `${selectedUser.name} was assigned to the task.`, 'success');
-  }
-};
+    const { value: formValues } = await mySwalReact.fire({
+      title: `Comments for "${task.content}"`,
+      html: `
+        <div style="margin-bottom:12px;max-height:120px;overflow:auto">${commentsHtml}</div>
+        <div style="margin-bottom:8px;text-align:left;">
+          <label for="userSelect"><b>User:</b></label>
+          <select id="userSelect" class="${styles.input}" style="width:100%;margin-top:2px;">
+            <option value="">Select a user</option>
+            ${userOptions}
+          </select>
+        </div>
+        <div style="text-align:left;">
+          <label for="commentInput"><b>Comment:</b></label>
+          <textarea id="commentInput" class="${styles.input} ${styles.textarea}" rows="3" style="width:100%;margin-top:2px;" placeholder="Write a comment"></textarea>
+        </div>
+      `,
+      showCancelButton: true,
+      confirmButtonText: 'Add Comment',
+      cancelButtonText: 'Close',
+      preConfirm: () => {
+        const userId = document.getElementById('userSelect').value;
+        const comment = document.getElementById('commentInput').value.trim();
+        if (!userId && comment) {
+          Swal.showValidationMessage('Please select a user.');
+          return false;
+        }
+        if (userId && !comment) {
+          Swal.showValidationMessage('Please write a comment.');
+          return false;
+        }
+        if (!userId && !comment) {
+          // No new comment to add, just close
+          return null;
+        }
+        const user = users.find(u => u.id === userId);
+        return { author: user.name, comment };
+      }
+    });
+
+    // Si se agregó un comentario nuevo
+    if (formValues) {
+      setColumns((cols) =>
+        cols.map((col) =>
+          col.id === columnId
+            ? {
+                ...col,
+                tasks: col.tasks.map((t) =>
+                  t.id === task.id
+                    ? {
+                        ...t,
+                        comments: [...(t.comments || []), formValues],
+                      }
+                    : t
+                ),
+              }
+            : col
+        )
+      );
+      Swal.fire('Saved!', 'Comment added.', 'success');
+    }
+  };
+
+  const handleAssignUser = async (task, columnId) => {
+    const { value: selectedUserId } = await mySwalReact.fire({
+      title: `Assign user to ${task.content}`,
+      input: "select",
+      inputOptions: users.reduce((acc, user) => {
+        acc[user.id] = user.name;
+        return acc;
+      }, {}),
+      inputPlaceholder: "Select a user",
+      showCancelButton: true,
+    });
+
+    if (selectedUserId) {
+      const selectedUser = users.find((u) => u.id === selectedUserId);
+      setColumns((cols) =>
+        cols.map((col) =>
+          col.id === columnId
+            ? {
+                ...col,
+                tasks: col.tasks.map((t) =>
+                  t.id === task.id ? { ...t, assignedTo: selectedUser } : t
+                ),
+              }
+            : col
+        )
+      );
+
+      Swal.fire(
+        "Assigned!",
+        `${selectedUser.name} was assigned to the task.`,
+        "success"
+      );
+    }
+  };
 
   return (
     <section className={styles.containerKanban}>

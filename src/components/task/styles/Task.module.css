@@ -204,3 +204,10 @@
   align-items: center;
   gap: 5px; /* Space between avatar and name */
 }
+
+.commentCount {
+  font-size: 0.8em;
+  margin-left: 4px;
+  color: #1976d2;
+  font-weight: bold;
+}

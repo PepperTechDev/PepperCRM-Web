@@ -16,8 +16,7 @@ function Column({
   onToggleChecklistItem,
   onEditChecklistItem,
   onDeleteChecklistItem,
-  onViewComments,
-  onChangeAssignedTo, 
+  onViewComments,   
 }) {
   const {
     setNodeRef: setDraggableRef,
@@ -108,9 +107,10 @@ function Column({
       onAddTask(column.id, {
         id: `task-${Date.now()}`,
         title: formValues.title,
-        content: formValues.description, // tu componente Task usa `content`
+        content: formValues.description,
         dueDate: formValues.dueDate,
-        checklist: [], // Initialize empty checklist for new tasks
+        checklist: [],
+        comments: [], // <-- Asegura que siempre exista
       });
     }
   };
@@ -156,12 +156,11 @@ function Column({
             onEditTask={(t) => onEditTask(column.id, t)}
             onDeleteTask={(t) => onDeleteTask(column.id, t)}
             onCopyTask={(t) => onCopyTask(column.id, t)}
-             onAddChecklistItem={(itemText) => onAddChecklistItem(column.id, task.id, itemText)}
+            onAddChecklistItem={(itemText) => onAddChecklistItem(column.id, task.id, itemText)}
             onToggleChecklistItem={(checklistItemId) => onToggleChecklistItem(column.id, task.id, checklistItemId)}
             onEditChecklistItem={(checklistItemId, newText) => onEditChecklistItem(column.id, task.id, checklistItemId, newText)}
             onDeleteChecklistItem={(checklistItemId) => onDeleteChecklistItem(column.id, task.id, checklistItemId)}
-            onViewComments={() => onViewComments(task)}
-            onChangeAssignedTo={(t) => onChangeAssignedTo(t , column.id)}
+            onViewComments={() => onViewComments(task, column.id)}
             
           />
         ))}
