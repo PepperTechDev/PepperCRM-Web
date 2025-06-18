@@ -33,8 +33,8 @@ importers:
         specifier: 'file:'
         version: 'file:'
       pnpm:
-        specifier: ^10.10.0
-        version: 10.11.0
+        specifier: ^10.12.1
+        version: 10.12.1
       prop-types:
         specifier: ^15.8.1
         version: 15.8.1
@@ -948,8 +948,8 @@ packages:
     resolution: {integrity: sha512-M7BAV6Rlcy5u+m6oPhAPFgJTzAioX/6B0DxyvDlo9l8+T3nLKbrczg2WLUyzd45L8RqfUMyGPzekbMvX2Ldkwg==}
     engines: {node: '>=12'}
 
-  pnpm@10.11.0:
-    resolution: {integrity: sha512-ZUBYP0HMX2KOs9l3Ps7oAvT575kjzEW2mJD7R5kdSwkpZGlOw6T3OKQgyRijMwYsi5JdMS9C5PDCY+tgNVH5dw==}
+  pnpm@10.12.1:
+    resolution: {integrity: sha512-8N2oWA8O6UgcXHmh2Se5Fk8sR46QmSrSaLuyRlpzaYQ5HWMz0sMnkTV4soBK8zR0ylVLopwEqLEwYKcXZ1rjrA==}
     engines: {node: '>=18.12'}
     hasBin: true
 
@@ -1856,7 +1856,7 @@ snapshots:
       jwt-decode: 4.0.0
       lucide-react: 0.516.0(react@19.1.0)
       multiselect-react-dropdown: 2.0.25(react@19.1.0)
-      pnpm: 10.11.0
+      pnpm: 10.12.1
       prop-types: 15.8.1
       react: 19.1.0
       react-datepicker: 8.4.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -1873,7 +1873,7 @@ snapshots:
 
   picomatch@4.0.2: {}
 
-  pnpm@10.11.0: {}
+  pnpm@10.12.1: {}
 
   postcss@8.5.3:
     dependencies:
