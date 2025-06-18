@@ -21,3 +21,16 @@ export const addColumn = async (newColumn) => {
 export const getBoartAll = async () => {
   return await api.get("/Boards/All");
 };
+
+// ...existing code...
+
+export const sendEmail = async ({ recipient, msgBody, subject, attachment }) => {
+  return await api.post("/Emails/send", {
+    recipient,
+    msgBody,
+    subject,
+    attachment,
+  });
+};
+
+

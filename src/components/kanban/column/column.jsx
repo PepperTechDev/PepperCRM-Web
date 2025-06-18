@@ -6,31 +6,27 @@ import Swal from "sweetalert2";
 
 function Column({
   column,
+  users,
+  labels,
   onEditTitle,
   onDeleteColumn,
   onAddTask,
   onEditTask,
   onDeleteTask,
   onCopyTask,
+  onChangeAssignedTo,
+  onViewComments,
   onAddChecklistItem,
   onToggleChecklistItem,
   onEditChecklistItem,
   onDeleteChecklistItem,
-  onViewComments,   
+  onAssignLabels,
 }) {
-  const {
-    setNodeRef: setDraggableRef,
-    attributes,
-    listeners,
-  } = useDraggable({ id: column.id });
-  const { setNodeRef: setDroppableRef, isOver } = useDroppable({
-    id: column.id,
-  });
 
-  const setNodeRef = (node) => {
-    setDraggableRef(node);
-    setDroppableRef(node);
-  };
+  const { setNodeRef: setDraggableRef, attributes, listeners } = useDraggable({ id: column.id });
+  const { setNodeRef: setDroppableRef, isOver } = useDroppable({ id: column.id });
+  const setNodeRef = (node) => { setDraggableRef(node); setDroppableRef(node); };
+
 
   const handleAddTask = async () => {
     const { value: formValues } = await Swal.fire({
@@ -57,6 +53,7 @@ function Column({
         <label for="cardDueDate" class="${styles.formLabel}">Deadline:</label>
         <input
           type="datetime-local"
+          min={new Date().toISOString().slice(0, 16)}
           id="cardDueDate"
           class="${styles.input}"
         />
@@ -153,15 +150,18 @@ function Column({
           <Task
             key={task.id}
             task={task}
+            users={users}
+            labels={labels}
             onEditTask={(t) => onEditTask(column.id, t)}
             onDeleteTask={(t) => onDeleteTask(column.id, t)}
             onCopyTask={(t) => onCopyTask(column.id, t)}
-            onAddChecklistItem={(itemText) => onAddChecklistItem(column.id, task.id, itemText)}
-            onToggleChecklistItem={(checklistItemId) => onToggleChecklistItem(column.id, task.id, checklistItemId)}
-            onEditChecklistItem={(checklistItemId, newText) => onEditChecklistItem(column.id, task.id, checklistItemId, newText)}
-            onDeleteChecklistItem={(checklistItemId) => onDeleteChecklistItem(column.id, task.id, checklistItemId)}
+            onChangeAssignedTo={(t) => onChangeAssignedTo(t, column.id)}
             onViewComments={() => onViewComments(task, column.id)}
-            
+            onAddChecklistItem={(text) => onAddChecklistItem(column.id, task.id, text)}
+            onToggleChecklistItem={(id) => onToggleChecklistItem(column.id, task.id, id)}
+            onEditChecklistItem={(id, text) => onEditChecklistItem(column.id, task.id, id, text)}
+            onDeleteChecklistItem={(id) => onDeleteChecklistItem(column.id, task.id, id)}
+            onAssignLabels={(selectedIds) => onAssignLabels(column.id, task.id, selectedIds)}
           />
         ))}
       </div>

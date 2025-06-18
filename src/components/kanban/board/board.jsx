@@ -9,7 +9,9 @@ import {
 } from "@dnd-kit/sortable";
 
 function Board({
-  columns,
+   columns,
+  users,
+  labels,
   setColumns,
   onEditTitle,
   onDeleteColumn,
@@ -17,12 +19,13 @@ function Board({
   onEditTask,
   onDeleteTask,
   onCopyTask,
+  onChangeAssignedTo,
   onViewComments,
   onAddChecklistItem,
   onToggleChecklistItem,
   onEditChecklistItem,
   onDeleteChecklistItem,
-  onChangeAssignedTo, 
+  onAssignLabels,
 }) {
   const { setNodeRef } = useDroppable({
     id: "board", // Necesario para que actúe como área de drop
@@ -64,18 +67,21 @@ function Board({
             <Column
               key={column.id}
               column={column}
+              users={users}
+              labels={labels}
               onEditTitle={onEditTitle}
               onDeleteColumn={onDeleteColumn}
               onAddTask={onAddTask}
               onEditTask={onEditTask}
               onDeleteTask={onDeleteTask}
               onCopyTask={onCopyTask}
+              onChangeAssignedTo={onChangeAssignedTo}
+              onViewComments={onViewComments}
               onAddChecklistItem={onAddChecklistItem}
               onToggleChecklistItem={onToggleChecklistItem}
               onEditChecklistItem={onEditChecklistItem}
               onDeleteChecklistItem={onDeleteChecklistItem}
-              onViewComments={onViewComments}
-              onChangeAssignedTo={onChangeAssignedTo}
+              onAssignLabels={onAssignLabels}
             />
           ))}
         </SortableContext>
