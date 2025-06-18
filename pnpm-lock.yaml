@@ -54,11 +54,11 @@ importers:
         specifier: ^7.6.2
         version: 7.6.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       sweetalert2:
-        specifier: ^11.21.2
-        version: 11.21.2
+        specifier: ^11.22.0
+        version: 11.22.0
       sweetalert2-react-content:
         specifier: ^5.1.0
-        version: 5.1.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sweetalert2@11.21.2)
+        version: 5.1.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sweetalert2@11.22.0)
       uuid:
         specifier: ^11.1.0
         version: 11.1.0
@@ -1054,8 +1054,8 @@ packages:
       react-dom: ^18.0.0 || ^19.0.0
       sweetalert2: ^11.0.0
 
-  sweetalert2@11.21.2:
-    resolution: {integrity: sha512-DNNFzx16LBQDZh7r5WOfeAfWZBdEdLHl3+tpO9Z1WWKMzdsgBgpLPBduJWVNMB283HYcm8ex99clLYXki21hdA==}
+  sweetalert2@11.22.0:
+    resolution: {integrity: sha512-pSMuRGDULhh+wrFkO22O0YsIXxs8yFE0O+WVYXcqc/sTa1oRnf0JlR+vfQIRY1QM1UeFfnCjyw6DYnG75/oxiQ==}
 
   tabbable@6.2.0:
     resolution: {integrity: sha512-Cat63mxsVJlzYvN51JmVXIgNoUokrIaT2zLclCXjRd8boZ0004U4KCs/sToJ75C6sdlByWxpYnb5Boif1VSFew==}
@@ -1863,8 +1863,8 @@ snapshots:
       react-dom: 19.1.0(react@19.1.0)
       react-hook-form: 7.58.0(react@19.1.0)
       react-router-dom: 7.6.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      sweetalert2: 11.21.2
-      sweetalert2-react-content: 5.1.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sweetalert2@11.21.2)
+      sweetalert2: 11.22.0
+      sweetalert2-react-content: 5.1.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sweetalert2@11.22.0)
       uuid: 11.1.0
     transitivePeerDependencies:
       - debug
@@ -1973,13 +1973,13 @@ snapshots:
     dependencies:
       has-flag: 4.0.0
 
-  sweetalert2-react-content@5.1.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sweetalert2@11.21.2):
+  sweetalert2-react-content@5.1.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sweetalert2@11.22.0):
     dependencies:
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
-      sweetalert2: 11.21.2
+      sweetalert2: 11.22.0
 
-  sweetalert2@11.21.2: {}
+  sweetalert2@11.22.0: {}
 
   tabbable@6.2.0: {}
 
