@@ -1,32 +1,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 html {
-  font-size: 16px;
+    font-size: 16px;
 }
 
 body {
-  font-family: "Roboto", sans-serif;
-  line-height: 1.5;  
-  color: #333;
-  background-color: #F8FDFF;
+    font-family: "Roboto", sans-serif;
+    line-height: 1.5;
+    color: #333;
+    background-color: #F8FDFF;
 }
 
 :root {
-  --primary-color: #00ffe5 ;
-  --secondary-color: #038C73 ;
-  --third-color: #02735E ;
-  --Four-color: #014034  ;
-  --background-color: #F8FDFF ;
-  --background-color-dark: #000a16;
+    --primary-color: #00ffe5;
+    --secondary-color: #038C73;
+    --third-color: #02735E;
+    --Four-color: #014034;
+    --background-color: #F8FDFF;
+    --background-color-dark: #000a16;
 
-  --text-color: #000a16;
-  --info-text-color: #b6b5b5;
-  --accent-color: #36BFB1;
-  --muted-color: #ccc;
+    --text-color: #000a16;
+    --info-text-color: #b6b5b5;
+    --accent-color: #36BFB1;
+    --muted-color:   #ccc;
 }
