@@ -1,13 +1,13 @@
 .containerVendors {
-  display: flex;
-  gap: 12px;
+    display: flex;
+    gap: 12px;
 }
 
 .flexVendors {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
 }
 
 .box {
@@ -24,13 +24,13 @@
     justify-content: space-between;
     gap: 5px;
     min-height: 10rem;
-  }
-  
-  .box h2 {
-    margin-left: 2rem;
-  }
+}
 
-  .buttons {
+.box h2 {
+    margin-left: 2rem;
+}
+
+.buttons {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -38,9 +38,9 @@
     gap: 0.5rem;
     margin: 2rem;
     min-width: flex;
-  }
-  
-  .button {
+}
+
+.button {
     padding: 10px 10px;
     border: none;
     border-radius: 12px;
@@ -48,28 +48,28 @@
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s ease;
-  }
-  
-  .button.add {
+}
+
+.button.add {
     background-color: #4caf50;
-  }
-  
-  .button.add:hover {
+}
+
+.button.add:hover {
     background-color: #45a049;
-  }
-  
-  .button.delete {
+}
+
+.button.delete {
     background-color: #f44336;
-  }
-  
-  .button.delete:hover {
+}
+
+.button.delete:hover {
     background-color: #d32f2f;
-  }
-  
-  .button.edit {
+}
+
+.button.edit {
     background-color: #2196f3;
-  }
-  
-  .button.edit:hover {
+}
+
+.button.edit:hover {
     background-color: #1976d2;
-  }
+}

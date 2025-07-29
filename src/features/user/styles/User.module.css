@@ -1,156 +1,156 @@
 .containerUser {
-  display: flex;
-  gap: 12px;
+    display: flex;
+    gap: 12px;
 }
 
 .flexUser {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
 }
 
 .box {
-  min-height: 7.5rem;
-  height: fit-content;
-  padding: 2rem;
-  background-color: #fff;
-  border: 2px solid #ccc;
-  border-radius: 15px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  font-family: Arial, sans-serif;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 5px;
-  min-height: 10rem;
+    min-height: 7.5rem;
+    height: fit-content;
+    padding: 2rem;
+    background-color: #fff;
+    border: 2px solid #ccc;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
+    min-height: 10rem;
 }
 
 .box h2 {
-  margin-left: 2rem;
+    margin-left: 2rem;
 }
 
 .buttons {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  max-height: 50%;
-  gap: 0.5rem;
-  margin: 2rem;
-  min-width: flex;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-height: 50%;
+    gap: 0.5rem;
+    margin: 2rem;
+    min-width: flex;
 }
 
 .button {
-  padding: 10px 10px;
-  border: none;
-  border-radius: 12px;
-  color: #fff;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+    padding: 10px 10px;
+    border: none;
+    border-radius: 12px;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .button.add {
-  background-color: #4caf50;
+    background-color: #4caf50;
 }
 
 .button.add:hover {
-  background-color: #45a049;
+    background-color: #45a049;
 }
 
 .button.delete {
-  background-color: #f44336;
+    background-color: #f44336;
 }
 
 .button.delete:hover {
-  background-color: #d32f2f;
+    background-color: #d32f2f;
 }
 
 .button.edit {
-  background-color: #2196f3;
+    background-color: #2196f3;
 }
 
 .button.edit:hover {
-  background-color: #1976d2;
+    background-color: #1976d2;
 }
 
 .profileBoard {
-  width: 100%;
-  box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.25);
-  border-right: 1px solid #ddd;
-  border-radius: 16px;
-  margin: 0 auto;
-  padding: 32px 40px;
-  min-width: 320px;
-  font-family: 'Inter', Arial, sans-serif;
+    width: 100%;
+    box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.25);
+    border-right: 1px solid #ddd;
+    border-radius: 16px;
+    margin: 0 auto;
+    padding: 32px 40px;
+    min-width: 320px;
+    font-family: 'Inter', Arial, sans-serif;
 }
 
 .profileBoard h2 {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 24px;
-  color: var(--third-color);
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 24px;
+    color: var(--third-color);
 }
 
 .profileBoard p {
-  font-size: 1.1rem;
-  margin: 10px 0;
+    font-size: 1.1rem;
+    margin: 10px 0;
 }
 
 .profileBoard b {
-  color: var(--secondary-color);
-  font-weight: 600;
+    color: var(--secondary-color);
+    font-weight: 600;
 }
 
 .profileBoard button {
-  background: var(--accent-color);
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  padding: 8px 24px;
-  font-size: 1rem;
-  font-weight: 600;
-  margin: 16px 8px 0 0;
-  cursor: pointer;
-  transition: background 0.2s;
-  box-shadow: 0 1px 4px rgba(10, 108, 255, 0.08);
+    background: var(--accent-color);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 24px;
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 16px 8px 0 0;
+    cursor: pointer;
+    transition: background 0.2s;
+    box-shadow: 0 1px 4px rgba(10, 108, 255, 0.08);
 }
 
 .profileBoard button[type="button"] {
-  background: #e5e9f2;
-  color: #222;
+    background: #e5e9f2;
+    color: #222;
 }
 
 .profileBoard button:hover {
-  background: #084db9;
+    background: #084db9;
 }
 
 .profileBoard button[type="button"]:hover {
-  background: #d1d7e6;
+    background: #d1d7e6;
 }
 
 .profileBoard label {
-  display: block;
-  margin: 18px 0 6px 0;
-  font-weight: 500;
-  color: #222;
+    display: block;
+    margin: 18px 0 6px 0;
+    font-weight: 500;
+    color: #222;
 }
 
 .profileBoard input[type="text"],
 .profileBoard input[type="email"] {
-  width: 100%;
-  max-width: 300px;
-  padding: 10px 12px;
-  border: 1px solid #e5e9f2;
-  border-radius: 6px;
-  font-size: 1rem;
-  background: #f7fafd;
-  transition: border 0.2s;
-  margin-left: 12px;
+    width: 100%;
+    max-width: 300px;
+    padding: 10px 12px;
+    border: 1px solid #e5e9f2;
+    border-radius: 6px;
+    font-size: 1rem;
+    background: #f7fafd;
+    transition: border 0.2s;
+    margin-left: 12px;
 }
 
 .profileBoard input:focus {
-  border: 1.5px solid #0a6cff;
-  outline: none;
-  background: #fff;
+    border: 1.5px solid #0a6cff;
+    outline: none;
+    background: #fff;
 }

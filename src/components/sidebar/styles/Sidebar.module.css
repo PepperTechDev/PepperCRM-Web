@@ -1,92 +1,92 @@
 .sidebar {
-  width: 240px;
-  min-height: 100vh;
-  box-sizing: border-box;
-  border-right: 1px solid #ddd;
-  border-radius: 0px 15px;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+    width: 240px;
+    min-height: 100vh;
+    box-sizing: border-box;
+    border-right: 1px solid #ddd;
+    border-radius: 0px 15px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
 }
 
 .logo {
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  font-size: .9em;
-  font-weight: bold;
-  padding: 20px 20px;
-  border-bottom: 1px solid #ddd;
-  border-radius: 0px 15px 15px 0px;
-  gap: 10px;  
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    font-size: .9em;
+    font-weight: bold;
+    padding: 20px 20px;
+    border-bottom: 1px solid #ddd;
+    border-radius: 0px 15px 15px 0px;
+    gap: 10px;
 }
 
 .logoLink {
-  display: flex;
-  align-items: center;
-  text-decoration: none; /* Evita subrayados en el enlace */
+    display: flex;
+    align-items: center;
+    text-decoration: none; /* Evita subrayados en el enlace */
 }
 
 .logoIcon {
-  width: 40px;
-  height: 40px;
-  gap: 10px;
-  filter: drop-shadow(0 0 12px var(--background-color-dark));  
+    width: 40px;
+    height: 40px;
+    gap: 10px;
+    filter: drop-shadow(0 0 12px var(--background-color-dark));
 }
 
 .logoIcon img {
-  width: 100%;
-   
+    width: 100%;
+
 }
 
 .logoText {
-  background: linear-gradient(to bottom, #36BFB1, #02735E);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: transparent;
+    background: linear-gradient(to bottom, #36BFB1, #02735E);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
 
 }
 
 .menu {
-  padding: 0px 35px;
-  margin-top: 30px;
+    padding: 0px 35px;
+    margin-top: 30px;
 }
 
 .sectionTitle {
-  color: #999;
-  font-size: 0.70rem;
-  margin: 20px 0 10px;
-  text-transform: uppercase;
+    color: #999;
+    font-size: 0.70rem;
+    margin: 20px 0 10px;
+    text-transform: uppercase;
 }
 
 .menu ul {
-  list-style: none;
+    list-style: none;
 }
 
 .menu li {
-  display: flex;
-  align-items: center;
-  padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
 }
 
 .link:hover {
-  border-radius: 12px;
-  transition: background 0.2s;
-  background-color: #f0f0f0;
-  color: var(--text-color);
+    border-radius: 12px;
+    transition: background 0.2s;
+    background-color: #f0f0f0;
+    color: var(--text-color);
 }
 
 .link {
-  display: flex;
-  align-items: center;
-  padding: 12px 16px;
-  text-decoration: none;
-  color: var(--text-color);
-  border-radius: 12px;
-  transition: background-color 0.3s ease;
-  gap: 16px;
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    text-decoration: none;
+    color: var(--text-color);
+    border-radius: 12px;
+    transition: background-color 0.3s ease;
+    gap: 16px;
 }
 
 .active {
-  background-color: var(--secondary-color);
-  color: var(--background-color);
+    background-color: var(--secondary-color);
+    color: var(--background-color);
 }
