@@ -23,7 +23,7 @@
     "react": "^19.2.0",
     "react-datepicker": "^8.4.0",
     "react-dom": "^19.2.0",
-    "react-hook-form": "^7.64.0",
+    "react-hook-form": "^7.65.0",
     "react-router-dom": "^7.9.3",
     "sweetalert2": "^11.26.1",
     "sweetalert2-react-content": "^5.1.0",
