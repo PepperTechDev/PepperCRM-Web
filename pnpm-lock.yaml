@@ -42,8 +42,8 @@ importers:
         specifier: ^19.2.0
         version: 19.2.0
       react-datepicker:
-        specifier: ^8.4.0
-        version: 8.7.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        specifier: ^8.8.0
+        version: 8.8.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       react-dom:
         specifier: ^19.2.0
         version: 19.2.0(react@19.2.0)
@@ -1117,8 +1117,8 @@ packages:
     resolution: {integrity: sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg==}
     engines: {node: '>=6'}
 
-  react-datepicker@8.7.0:
-    resolution: {integrity: sha512-r5OJbiLWc3YiVNy69Kau07/aVgVGsFVMA6+nlqCV7vyQ8q0FUOnJ+wAI4CgVxHejG3i5djAEiebrF8/Eip4rIw==}
+  react-datepicker@8.8.0:
+    resolution: {integrity: sha512-rIJLhww1B5cQY7GYEfSEXvldlGp+GIVU5oE7lxqeK4fmdv5F9bVndplDmblMCvfSMazXmeJ6OHBvRs/PkEhwUQ==}
     peerDependencies:
       react: ^16.9.0 || ^17 || ^18 || ^19 || ^19.0.0-rc
       react-dom: ^16.9.0 || ^17 || ^18 || ^19 || ^19.0.0-rc
@@ -2200,7 +2200,7 @@ snapshots:
       pnpm: 10.18.3
       prop-types: 15.8.1
       react: 19.2.0
-      react-datepicker: 8.7.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      react-datepicker: 8.8.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       react-dom: 19.2.0(react@19.2.0)
       react-hook-form: 7.65.0(react@19.2.0)
       react-router-dom: 7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -2234,7 +2234,7 @@ snapshots:
 
   punycode@2.3.1: {}
 
-  react-datepicker@8.7.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0):
+  react-datepicker@8.8.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0):
     dependencies:
       '@floating-ui/react': 0.27.16(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       clsx: 2.1.1
