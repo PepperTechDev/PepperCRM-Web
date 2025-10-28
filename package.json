@@ -18,7 +18,7 @@
     "lucide-react": "^0.546.0",
     "multiselect-react-dropdown": "^2.0.25",
     "peppercrm-web": "file:",
-    "pnpm": "^10.18.3",
+    "pnpm": "^10.19.0",
     "prop-types": "^15.8.1",
     "react": "^19.2.0",
     "react-datepicker": "^8.8.0",
